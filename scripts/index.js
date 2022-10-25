@@ -96,6 +96,7 @@ function deactivateButton(btn) {
 // //_____________________________
 // //  ДОБАВЛЕНИЕ КАРТОЧЕК
 // //_____________________________
+
 class Card{
   constructor(data, selector) {
       this._name = data.name
@@ -153,7 +154,6 @@ initialCards.forEach(item => {
   addElementInContainer(cardElement ,cardsContainer)
 });
 
-
 //_____________________________
 //  ПОПАП ФОТО
 //_____________________________
@@ -170,7 +170,6 @@ function openFoto (name, link) {
 buttonCloseFoto.addEventListener('click', () => {
 closePopup(popupFoto);
 }); 
-
 
 //_____________________________
 //  ПОПАП ДОБАВЛЕНИЯ КАРТОЧКИ
@@ -200,7 +199,6 @@ formElementAddFoto.addEventListener('submit', submitHandlerFoto);
 buttonCloseAddFoto.addEventListener('click', () => {
   closePopup(popupAddCard);
 });
-
 
 //_____________________________
 //  РЕДАКТИРОВАНИЕ ПРОФИЛЯ
