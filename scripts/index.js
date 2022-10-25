@@ -104,21 +104,21 @@ class Card{
       this._selector = selector
   }
 
-  createCard(data) {
+  createCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
 
     const cardFoto =  this._element.querySelector('.element__foto');
-    this._element.querySelector('.element__name').textContent = data.name;
-    cardFoto.src = data.link;
-    cardFoto.alt = `${data.name} на фотографии`;
+    this._element.querySelector('.element__name').textContent = this._name;
+    cardFoto.src = this._link;
+    cardFoto.alt = `${this._name} на фотографии`;
     
     return this._element;
   };
 
   _getTemplate() {
     const cardElement = document
-      .querySelector('.elements__list')
+      .querySelector(this._selector)
       .content
       .querySelector('.element')
       .cloneNode(true);
@@ -149,7 +149,7 @@ class Card{
 
 // добавление массив фотографий
 initialCards.forEach(item => {
-  const card = new Card(item, '.elements');
+  const card = new Card(item, '.elements__list');
   const cardElement = card.createCard(item)
   addElementInContainer(cardElement ,cardsContainer)
 });
@@ -189,7 +189,7 @@ function submitHandlerFoto (evt) {
     name: nameFotoInput.value,
     link: linkFotoInput.value
   }
-  card = new Card(dataCard, '.elements').createCard(dataCard)
+  const card = new Card(dataCard, '.elements__list').createCard()
   addElementInContainer(card, cardsContainer);
   closePopup(popupAddCard);
 };
