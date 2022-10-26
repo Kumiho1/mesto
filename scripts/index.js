@@ -1,5 +1,5 @@
-import FormValidator from './FormValidator';
-import Card from './Сard';
+import FormValidator from './FormValidator.js';
+import Card from './Сard.js';
 
 
 // значения profile
@@ -122,14 +122,6 @@ initialCards.forEach(item => {
 //  ПОПАП ФОТО
 //_____________________________
 
-// открытие попапа фото  
-function openFoto (name, link) {
-  openPopup(popupFoto);
-  imgFoto.src = link;
-  imgFoto.alt = `${name} на фотографии`;
-  nameFoto.textContent = name;
-};
-
 // закрытие попапа фото
 buttonCloseFoto.addEventListener('click', () => {
 closePopup(popupFoto);
@@ -195,5 +187,5 @@ buttonCloseEdit.addEventListener('click', () => {
 closePopup(popupEdit); 
 });
 
-new FormValidator(validationObject, '.popup-edit').enableValidation()
-new FormValidator(validationObject, '.popup-add-card').enableValidation()
+new FormValidator(validationObject, '.popup__form-edit').enableValidation()
+new FormValidator(validationObject, '.popup__form-card').enableValidation()

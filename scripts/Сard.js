@@ -38,7 +38,7 @@ export default class Card{
       }
   
     _openFoto() {
-      this._element.querySelector('.element__foto').addEventListener('click', ()=> openFoto(this._name, this._link));
+      this._element.querySelector('.element__foto').addEventListener('click', () => this._openFotoZum());
     }
   
     _like() {
@@ -49,5 +49,18 @@ export default class Card{
   
     _remove() {
       this._element.querySelector('.element__btn-trash').addEventListener ('click', () => this._element.closest('.element').remove());
+    }
+
+    // открытие попапа фото  
+    _openFotoZum () {
+      this._openPopup();
+      imgFoto.src = this._link;
+      imgFoto.alt = `${this._name} на фотографии`;
+      nameFoto.textContent = this._name;
+    };
+
+    _openPopup () {
+      document.addEventListener('keydown', listenEscape);
+      p.classList.add('popup_opened');
     }
   }

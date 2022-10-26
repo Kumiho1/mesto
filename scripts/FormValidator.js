@@ -4,13 +4,13 @@
 
 export default class FormValidator {
   constructor (validationObject, formPrivateSelector) {
+    this._formPrivateSelector = formPrivateSelector
     this._formSelector = validationObject.formSelector
     this._inputSelector = validationObject.inputSelector
     this._inactiveButtonClass = validationObject.inactiveButtonClass
     this._inputErrorClass = validationObject.inputErrorClass
     this._errorClass = validationObject.errorClass
     this._fieldSet = document.querySelector(validationObject.fieldSet)
-    this._formPrivateSelector = formPrivateSelector
     this._inputList = Array.from(this._fieldSet.querySelectorAll(this._inputSelector))
     this._submitButtonSelector = this._fieldSet.querySelector(validationObject.submitButtonSelector)
   }
@@ -38,7 +38,6 @@ export default class FormValidator {
 
   // активация и дезактивация кнопки
   _toggleButtonState () {
-    console.log(this._hasInvalidInput())
     if (this._hasInvalidInput()){
       this._submitButtonSelector.classList.add(this._inactiveButtonClass)
       this._submitButtonSelector.disabled = true;
