@@ -179,7 +179,7 @@ buttonAddCard.addEventListener('click', ()=>{
   resetForm(popupAddCard);
   openPopup(popupAddCard);
   deactivateButton(buttonSaveAddFoto);
-  new FormValidator(validationObject, '.popup-add-card').enableValidation()
+  // new FormValidator(validationObject, '.popup-add-card').enableValidation()
 });
 
 // обработчик «отправки» формы добавления фото
@@ -214,7 +214,7 @@ buttonEdit.addEventListener('click', ()=>{
   nameInput.value = titleName.textContent;
   jobInput.value = titleJob.textContent;
   nameInput.focus();
-  new FormValidator(validationObject, '.popup-edit').enableValidation()
+  // new FormValidator(validationObject, '.popup-edit').enableValidation()
 });
 
 // обработчик «отправки» формы редактирования профиля
