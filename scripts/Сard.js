@@ -53,14 +53,11 @@ export default class Card{
 
     // открытие попапа фото  
     _openFotoZum () {
-      this._openPopup();
+      
       imgFoto.src = this._link;
       imgFoto.alt = `${this._name} на фотографии`;
       nameFoto.textContent = this._name;
+      openPopup(popupFoto);
     };
 
-    _openPopup () {
-      document.addEventListener('keydown', listenEscape);
-      p.classList.add('popup_opened');
-    }
   }

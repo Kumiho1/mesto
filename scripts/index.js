@@ -187,5 +187,5 @@ buttonCloseEdit.addEventListener('click', () => {
 closePopup(popupEdit); 
 });
 
-new FormValidator(validationObject, '.popup__form-edit').enableValidation()
-new FormValidator(validationObject, '.popup__form-card').enableValidation()
+new FormValidator(validationObject, '.popup-edit').enableValidation()
+new FormValidator(validationObject, '.popup-add-card').enableValidation()
