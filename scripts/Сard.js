@@ -2,6 +2,13 @@
 // //  ДОБАВЛЕНИЕ КАРТОЧЕК
 // //_____________________________
 
+// попап просмотра фото
+const popupFoto = document.querySelector('.popup-foto');
+
+const imgFoto = popupFoto.querySelector('.popup__foto');
+const nameFoto = popupFoto.querySelector('.popup__name');
+
+
 export default class Card{
     constructor(data, selector) {
         this._name = data.name
@@ -61,3 +68,22 @@ export default class Card{
     };
 
   }
+
+  // показать попап
+function openPopup(p) {
+  document.addEventListener('keydown', listenEscape);
+  p.classList.add('popup_opened');
+};
+
+// скрыть попап 
+function closePopup(p) {
+  document.removeEventListener('keydown', listenEscape);
+  p.classList.remove('popup_opened');
+};
+
+// слушатель Esc
+function listenEscape(evt) {
+  if (evt.key === 'Escape') {
+    closePopup(document.querySelector('.popup_opened'));
+  };
+};
