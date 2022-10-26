@@ -16,16 +16,16 @@ class FormValidator {
   constructor (validationObject, formPrivateSelector) {
     this._formSelector = validationObject.formSelector
     this._inputSelector = validationObject.inputSelector
-    this._submitButtonSelector = document.querySelector(validationObject.fieldSet).querySelector(validationObject.submitButtonSelector)
     this._inactiveButtonClass = validationObject.inactiveButtonClass
     this._inputErrorClass = validationObject.inputErrorClass
     this._errorClass = validationObject.errorClass
     this._fieldSet = document.querySelector(validationObject.fieldSet)
     this._formPrivateSelector = formPrivateSelector
     this._inputList = Array.from(this._fieldSet.querySelectorAll(this._inputSelector))
+    this._submitButtonSelector = this._fieldSet.querySelector(validationObject.submitButtonSelector)
   }
 
-  //  отмена перезагрузки. выделение филдсетов
+  //  отмена перезагрузки. выделение инпутов
   enableValidation() {
     
     document.querySelector(this._formPrivateSelector).addEventListener('submit', function (evt) {
@@ -39,10 +39,8 @@ class FormValidator {
     this._toggleButtonState();
 
     this._inputList.forEach((inputElement) => {
-      this._inputElement = inputElement
-      inputElement.addEventListener('input', function () {
-        console.log(inputElement)
-        // this._checkInputValidity();
+      inputElement.addEventListener('input', () => {
+        this._checkInputValidity(inputElement);
         this._toggleButtonState();
       });
     });
@@ -50,6 +48,7 @@ class FormValidator {
 
   // активация и дезактивация кнопки
   _toggleButtonState () {
+    console.log(this._hasInvalidInput())
     if (this._hasInvalidInput()){
       this._submitButtonSelector.classList.add(this._inactiveButtonClass)
       this._submitButtonSelector.disabled = true;
@@ -60,11 +59,11 @@ class FormValidator {
   };
 
   // проверка на валидность
-  _checkInputValidity() {
-    if (!this._inputElement.validity.valid) {
-      this._showInputError();
+  _checkInputValidity(inputElement) {
+    if (!inputElement.validity.valid) {
+      this._showInputError(inputElement);
     } else {
-      this._hideInputError();
+      this._hideInputError(inputElement);
     }
   };
 
@@ -75,16 +74,16 @@ class FormValidator {
   };
 
   // span ошибки
-  _showInputError() {
-    const errorElement = this._fieldSet.querySelector(`.${this._inputElement.id}-error`);
-    this._inputElement.classList.add(this._inputErrorClass);
-    errorElement.textContent = this._inputElement.validationMessage;
+  _showInputError(inputElement) {
+    const errorElement = this._fieldSet.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.add(this._inputErrorClass);
+    errorElement.textContent = inputElement.validationMessage;
     errorElement.classList.add(this._errorClass);
   };
 
-  _hideInputError() {
-    const errorElement = this._fieldSet.querySelector(`.${this._inputElement.id}-error`);
-    this._inputElement.classList.remove(this._inputErrorClass);
+  _hideInputError(inputElement) {
+    const errorElement = this._fieldSet.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.remove(this._inputErrorClass);
     errorElement.classList.remove(this._errorClass);
     errorElement.textContent = '';
   };
