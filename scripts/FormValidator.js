@@ -2,17 +2,7 @@
 //  ВАЛИДАЦИЯ
 //_____________________________
 
-const validationObject = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__btn-save',
-  inactiveButtonClass: 'btn-save_inactive',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_active',
-  fieldSet:'.popup__set'
-};
-
-class FormValidator {
+export default class FormValidator {
   constructor (validationObject, formPrivateSelector) {
     this._formSelector = validationObject.formSelector
     this._inputSelector = validationObject.inputSelector
@@ -89,5 +79,3 @@ class FormValidator {
   };
 }
 
-new FormValidator(validationObject, '.popup-edit').enableValidation()
-new FormValidator(validationObject, '.popup-add-card').enableValidation()
