@@ -46,7 +46,7 @@ export default class Card{
       }
   
     _openFoto = () => {
-      this._element.querySelector('.element__foto').addEventListener('click', () => this._openFotoHandler(this._name, this._link));
+      this._element.querySelector('.element__foto').addEventListener('click', () => this._popupOpen(this._name, this._link));
     }
   
     _like() {
