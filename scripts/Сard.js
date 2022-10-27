@@ -46,7 +46,7 @@ export default class Card{
       }
   
     _openFoto = () => {
-      this._element.querySelector('.element__foto').addEventListener('click', () => this._openFotoHandler());
+      this._element.querySelector('.element__foto').addEventListener('click', () => this._openFotoHandler(this._name, this._link));
     }
   
     _like() {
@@ -58,15 +58,4 @@ export default class Card{
     _remove() {
       this._element.querySelector('.element__btn-trash').addEventListener ('click', () => this._element.closest('.element').remove());
     }
-
-    // открытие попапа фото  
-    _openFotoHandler = () => {
-      imgFoto.src = this._link;
-      imgFoto.alt = `${this._name} на фотографии`;
-      nameFoto.textContent = this._name;
-      this._popupOpen(popupFoto);
-
-      // ReferenceError: openPopup is not defined (если не передавать в конструктор)
-      // openPopup(popupFoto);
-    };
   }

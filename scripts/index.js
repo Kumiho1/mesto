@@ -120,7 +120,7 @@ new FormValidator(validationObject, '.popup-add-card').enableValidation()
 
 // добавление массива фотографий
 initialCards.forEach(item => {
-  const card = new Card(item, '.elements__list', openPopup);
+  const card = new Card(item, '.elements__list', openPopupFoto);
   const cardElement = card.createCard(item)
   addElementInContainer(cardElement ,cardsContainer)
 });
@@ -133,6 +133,14 @@ initialCards.forEach(item => {
 buttonCloseFoto.addEventListener('click', () => {
 closePopup(popupFoto);
 }); 
+
+// открытие попапа карточек
+function openPopupFoto(name, link) {
+      imgFoto.src = link;
+      imgFoto.alt = `${name} на фотографии`;
+      nameFoto.textContent = name;
+      popupOpen(popupFoto);
+}
 
 //_____________________________
 //  ПОПАП ДОБАВЛЕНИЯ КАРТОЧКИ
@@ -153,7 +161,7 @@ function submitHandlerFoto (evt) {
     name: nameFotoInput.value,
     link: linkFotoInput.value
   }
-  const card = new Card(dataCard, '.elements__list', openPopup).createCard()
+  const card = new Card(dataCard, '.elements__list', openPopupFoto).createCard()
   addElementInContainer(card, cardsContainer);
   closePopup(popupAddCard);
 };
