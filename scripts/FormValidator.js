@@ -73,5 +73,19 @@ export default class FormValidator {
     errorElement.classList.remove(this._errorClass);
     errorElement.textContent = '';
   };
+
+  // сброс формы
+  resetForm() {
+    // очистка инпутов
+    this._formPrivateSelector.querySelector(this._formSelector).reset();
+    // удаление ошибки
+    this._formPrivateSelector.querySelectorAll('.popup__input-error').forEach(spanError =>{
+        spanError.textContent='';
+      })
+    // удаление стиля ошибки
+    this._formPrivateSelector.querySelectorAll(this._inputSelector).forEach(inputElement =>{
+        inputElement.classList.remove(this._inputErrorClas);
+      })
+  };
 }
 

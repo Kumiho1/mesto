@@ -1,4 +1,6 @@
+//_____________________________
 // карточки по умолчанию
+//_____________________________
 const initialCards = [
     {
       name: 'Италия',
@@ -25,3 +27,17 @@ const initialCards = [
       link: 'https://images.unsplash.com/photo-1568607689150-17e625c1586e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
     }
   ];
+
+//_____________________________
+//  для валидации
+//_____________________________
+
+const validationObject = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__btn-save',
+  inactiveButtonClass: 'btn-save_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active',
+  fieldSet:'.popup__set'
+};

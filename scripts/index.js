@@ -76,40 +76,6 @@ function handleListenEscape(evt) {
   };
 };
 
-// сброс формы
-function resetForm(p) {
-  // очистка инпутов
-    p.querySelector('.popup__form').reset();
-  // удаление ошибки
-    p.querySelectorAll('.popup__input-error').forEach(spanError =>{
-      spanError.textContent='';
-    })
-  // удаление стиля ошибки
-    p.querySelectorAll('.popup__input').forEach(inputElement =>{
-      inputElement.classList.remove('popup__input_type_error');
-    })
-};
-
-// блокировка кнопки
-function deactivateButton(btn) {
-  btn.classList.add('btn-save_inactive');
-  btn.disabled = true;
-};
-
-//_____________________________
-//  для валидации
-//_____________________________
-
-const validationObject = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__btn-save',
-  inactiveButtonClass: 'btn-save_inactive',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_active',
-  fieldSet:'.popup__set'
-};
-
 //_____________________________
 //  добавление массива фотографий
 //_____________________________
@@ -143,10 +109,9 @@ function openPopupFoto(name, link) {
 //_____________________________
 
 buttonAddCard.addEventListener('click', ()=>{
-  new FormValidator(validationObject, '.popup-add-card').enableValidation();
-  resetForm(popupAddCard);
+  const popupAddFotoValidate = new FormValidator(validationObject, '.popup-add-card').enableValidation();
+  popupAddFotoValidate.resetForm();
   openPopup(popupAddCard);
-  deactivateButton(buttonSaveAddFoto);
 });
 
 // обработчик «отправки» формы добавления фото
@@ -174,10 +139,10 @@ buttonCloseAddFoto.addEventListener('click', () => {
 
 // нажатие кнопки редактирования
 buttonEdit.addEventListener('click', ()=>{  
-  new FormValidator(validationObject, '.popup-edit').enableValidation();
-  resetForm(popupEdit);
+  const popupEditValidate = new FormValidator(validationObject, '.popup-edit').enableValidation();
+  popupEditValidate.resetForm();
   openPopup(popupEdit);
-  deactivateButton(buttonSaveEdit)
+
   // присвоение значения title инпутам
   nameInput.value = titleName.textContent;
   jobInput.value = titleJob.textContent;
