@@ -65,8 +65,8 @@ export default class Card{
       imgFoto.alt = `${this._name} на фотографии`;
       nameFoto.textContent = this._name;
       this._popupOpen(popupFoto);
+
+      // ReferenceError: openPopup is not defined
+      // openPopup(popupFoto)
     };
-
   }
-
-
