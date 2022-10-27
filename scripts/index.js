@@ -135,7 +135,7 @@ function openPopupFoto(name, link) {
       imgFoto.src = link;
       imgFoto.alt = `${name} на фотографии`;
       nameFoto.textContent = name;
-      popupOpen(popupFoto);
+      openPopup(popupFoto);
 }
 
 //_____________________________

@@ -14,7 +14,7 @@ export default class Card{
         this._name = data.name
         this._link = data.link
         this._selector = selector
-        this._popupOpen = functionOpenPopup
+        this._functionOpenPopup = functionOpenPopup
     }
   
     createCard() {
@@ -46,7 +46,7 @@ export default class Card{
       }
   
     _openFoto = () => {
-      this._element.querySelector('.element__foto').addEventListener('click', () => this._popupOpen(this._name, this._link));
+      this._element.querySelector('.element__foto').addEventListener('click', () => this._functionOpenPopup(this._name, this._link));
     }
   
     _like() {
