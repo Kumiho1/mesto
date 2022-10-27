@@ -45,7 +45,7 @@ export default class Card{
       }
   
     _openFoto() {
-      this._element.querySelector('.element__foto').addEventListener('click', () => this._openFotoZum());
+      this._element.querySelector('.element__foto').addEventListener('click', () => this._openFotoHandler());
     }
   
     _like() {
@@ -59,21 +59,35 @@ export default class Card{
     }
 
     // открытие попапа фото  
-    _openFotoZum () {
-      
+    _openFotoHandler () {
       imgFoto.src = this._link;
       imgFoto.alt = `${this._name} на фотографии`;
       nameFoto.textContent = this._name;
-      openPopup(popupFoto);
+      this._openPopup();
     };
 
+    _openPopup() {
+      document.addEventListener('keydown', listenEscape);
+      document.querySelector('.popup-foto').classList.add('popup_opened');
+    };
+
+    _listenEscape() {
+      if (evt.key === 'Escape') {
+        this._closePopup();
+      };
+    };
+
+    _closePopup() {
+      document.removeEventListener('keydown', listenEscape);
+      document.querySelector('.popup-foto').classList.remove('popup_opened');
+    };
   }
 
-  // показать попап
-function openPopup(p) {
-  document.addEventListener('keydown', listenEscape);
-  p.classList.add('popup_opened');
-};
+//   // показать попап
+// function openPopup(p) {
+//   document.addEventListener('keydown', listenEscape);
+//   p.classList.add('popup_opened');
+// };
 
 // скрыть попап 
 function closePopup(p) {

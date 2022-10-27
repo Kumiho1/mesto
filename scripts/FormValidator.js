@@ -4,28 +4,25 @@
 
 export default class FormValidator {
   constructor (validationObject, formPrivateSelector) {
-    this._formPrivateSelector = formPrivateSelector
+    this._formPrivateSelector = document.querySelector(formPrivateSelector)
     this._formSelector = validationObject.formSelector
     this._inputSelector = validationObject.inputSelector
     this._inactiveButtonClass = validationObject.inactiveButtonClass
     this._inputErrorClass = validationObject.inputErrorClass
     this._errorClass = validationObject.errorClass
-    this._fieldSet = document.querySelector(validationObject.fieldSet)
+    this._fieldSet = this._formPrivateSelector.querySelector(validationObject.fieldSet)
     this._inputList = Array.from(this._fieldSet.querySelectorAll(this._inputSelector))
     this._submitButtonSelector = this._fieldSet.querySelector(validationObject.submitButtonSelector)
   }
 
   //  отмена перезагрузки. выделение инпутов
   enableValidation() {
-    
-    document.querySelector(this._formPrivateSelector).addEventListener('submit', function (evt) {
-        evt.preventDefault();
-      });
     this._setEventListeners();
   };
 
   //  выделение инпутов  
   _setEventListeners() {   
+
     this._toggleButtonState();
 
     this._inputList.forEach((inputElement) => {

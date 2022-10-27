@@ -50,6 +50,9 @@ const validationObject = {
   fieldSet:'.popup__set'
 };
 
+new FormValidator(validationObject, '.popup-edit').enableValidation()
+new FormValidator(validationObject, '.popup-add-card').enableValidation()
+
 // //_____________________________
 // //  УНИВЕРСАЛЬНОЕ
 // //_____________________________
@@ -187,5 +190,3 @@ buttonCloseEdit.addEventListener('click', () => {
 closePopup(popupEdit); 
 });
 
-new FormValidator(validationObject, '.popup-edit').enableValidation()
-new FormValidator(validationObject, '.popup-add-card').enableValidation()
