@@ -57,6 +57,7 @@ export default class Card{
     }
   
     _remove() {
-      this._element.querySelector('.element__btn-trash').addEventListener ('click', () => this._element.closest('.element').remove());
+      this._element.querySelector('.element__btn-trash')
+          .addEventListener ('click', () => this._element.closest('.element').remove());
     }
   }
