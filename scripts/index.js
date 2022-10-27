@@ -1,7 +1,6 @@
 import FormValidator from './FormValidator.js';
 import Card from './Сard.js';
 
-
 // значения profile
 const titleName = document.querySelector('.profile__name');
 const titleJob = document.querySelector('.profile__job');
@@ -98,8 +97,9 @@ function deactivateButton(btn) {
 };
 
 //_____________________________
-//  добавление классов
+//  для валидации
 //_____________________________
+
 const validationObject = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
