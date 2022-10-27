@@ -50,13 +50,13 @@ function addElementInContainer(element,container) {
 
 // показать попап
 function openPopup(p) {
-  document.addEventListener('keydown', listenEscape);
+  document.addEventListener('keydown', handleListenEscape);
   p.classList.add('popup_opened');
 };
 
 // скрыть попап 
 function closePopup(p) {
-  document.removeEventListener('keydown', listenEscape);
+  document.removeEventListener('keydown', handleListenEscape);
   p.classList.remove('popup_opened');
 };
 
@@ -70,7 +70,7 @@ popupList.forEach(p => {
 });
 
 // слушатель Esc
-function listenEscape(evt) {
+function handleListenEscape(evt) {
   if (evt.key === 'Escape') {
     closePopup(document.querySelector('.popup_opened'));
   };
@@ -195,6 +195,6 @@ formElementEdit.addEventListener('submit', submitHandler);
 
 // закрытие попапа редактирования
 buttonCloseEdit.addEventListener('click', () => {
-closePopup(popupEdit); 
+  closePopup(popupEdit); 
 });
 
