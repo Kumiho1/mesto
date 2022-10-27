@@ -67,6 +67,6 @@ export default class Card{
       this._popupOpen(popupFoto);
 
       // ReferenceError: openPopup is not defined
-      // openPopup(popupFoto)
+      // openPopup(popupFoto);
     };
   }
