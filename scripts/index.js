@@ -110,10 +110,6 @@ const validationObject = {
   fieldSet:'.popup__set'
 };
 
-new FormValidator(validationObject, '.popup-edit').enableValidation()
-new FormValidator(validationObject, '.popup-add-card').enableValidation()
-
-
 //_____________________________
 //  добавление массива фотографий
 //_____________________________
@@ -134,7 +130,7 @@ buttonCloseFoto.addEventListener('click', () => {
 closePopup(popupFoto);
 }); 
 
-// открытие попапа карточек
+// открытие попапа фото
 function openPopupFoto(name, link) {
       imgFoto.src = link;
       imgFoto.alt = `${name} на фотографии`;
@@ -147,10 +143,10 @@ function openPopupFoto(name, link) {
 //_____________________________
 
 buttonAddCard.addEventListener('click', ()=>{
+  new FormValidator(validationObject, '.popup-add-card').enableValidation();
   resetForm(popupAddCard);
   openPopup(popupAddCard);
   deactivateButton(buttonSaveAddFoto);
-  // new FormValidator(validationObject, '.popup-add-card').enableValidation()
 });
 
 // обработчик «отправки» формы добавления фото
@@ -177,7 +173,8 @@ buttonCloseAddFoto.addEventListener('click', () => {
 //_____________________________
 
 // нажатие кнопки редактирования
-buttonEdit.addEventListener('click', ()=>{
+buttonEdit.addEventListener('click', ()=>{  
+  new FormValidator(validationObject, '.popup-edit').enableValidation();
   resetForm(popupEdit);
   openPopup(popupEdit);
   deactivateButton(buttonSaveEdit)
@@ -185,7 +182,6 @@ buttonEdit.addEventListener('click', ()=>{
   nameInput.value = titleName.textContent;
   jobInput.value = titleJob.textContent;
   nameInput.focus();
-  // new FormValidator(validationObject, '.popup-edit').enableValidation()
 });
 
 // обработчик «отправки» формы редактирования профиля
