@@ -10,10 +10,11 @@ const nameFoto = popupFoto.querySelector('.popup__name');
 
 
 export default class Card{
-    constructor(data, selector) {
+    constructor(data, selector, functionOpenPopup) {
         this._name = data.name
         this._link = data.link
         this._selector = selector
+        this._popupOpen = functionOpenPopup
     }
   
     createCard() {
@@ -44,7 +45,7 @@ export default class Card{
       this._remove()
       }
   
-    _openFoto() {
+    _openFoto = () => {
       this._element.querySelector('.element__foto').addEventListener('click', () => this._openFotoHandler());
     }
   
@@ -59,45 +60,13 @@ export default class Card{
     }
 
     // открытие попапа фото  
-    _openFotoHandler () {
+    _openFotoHandler = () => {
       imgFoto.src = this._link;
       imgFoto.alt = `${this._name} на фотографии`;
       nameFoto.textContent = this._name;
-      this._openPopup();
+      this._popupOpen(popupFoto);
     };
 
-    _openPopup() {
-      document.addEventListener('keydown', listenEscape);
-      document.querySelector('.popup-foto').classList.add('popup_opened');
-    };
-
-    _listenEscape() {
-      if (evt.key === 'Escape') {
-        this._closePopup();
-      };
-    };
-
-    _closePopup() {
-      document.removeEventListener('keydown', listenEscape);
-      document.querySelector('.popup-foto').classList.remove('popup_opened');
-    };
   }
 
-//   // показать попап
-// function openPopup(p) {
-//   document.addEventListener('keydown', listenEscape);
-//   p.classList.add('popup_opened');
-// };
 
-// скрыть попап 
-function closePopup(p) {
-  document.removeEventListener('keydown', listenEscape);
-  p.classList.remove('popup_opened');
-};
-
-// слушатель Esc
-function listenEscape(evt) {
-  if (evt.key === 'Escape') {
-    closePopup(document.querySelector('.popup_opened'));
-  };
-};

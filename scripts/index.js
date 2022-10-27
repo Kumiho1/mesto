@@ -39,19 +39,6 @@ const nameFoto = popupFoto.querySelector('.popup__name');
 // карточки
 const cardsContainer = document.querySelector('.elements');
 
-// для валидации
-const validationObject = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__btn-save',
-  inactiveButtonClass: 'btn-save_inactive',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_active',
-  fieldSet:'.popup__set'
-};
-
-new FormValidator(validationObject, '.popup-edit').enableValidation()
-new FormValidator(validationObject, '.popup-add-card').enableValidation()
 
 // //_____________________________
 // //  УНИВЕРСАЛЬНОЕ
@@ -111,12 +98,29 @@ function deactivateButton(btn) {
 };
 
 //_____________________________
+//  добавление классов
+//_____________________________
+const validationObject = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__btn-save',
+  inactiveButtonClass: 'btn-save_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active',
+  fieldSet:'.popup__set'
+};
+
+new FormValidator(validationObject, '.popup-edit').enableValidation()
+new FormValidator(validationObject, '.popup-add-card').enableValidation()
+
+
+//_____________________________
 //  добавление массива фотографий
 //_____________________________
 
 // добавление массива фотографий
 initialCards.forEach(item => {
-  const card = new Card(item, '.elements__list');
+  const card = new Card(item, '.elements__list', openPopup);
   const cardElement = card.createCard(item)
   addElementInContainer(cardElement ,cardsContainer)
 });
@@ -149,7 +153,7 @@ function submitHandlerFoto (evt) {
     name: nameFotoInput.value,
     link: linkFotoInput.value
   }
-  const card = new Card(dataCard, '.elements__list').createCard()
+  const card = new Card(dataCard, '.elements__list', openPopup).createCard()
   addElementInContainer(card, cardsContainer);
   closePopup(popupAddCard);
 };
