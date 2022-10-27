@@ -66,7 +66,7 @@ export default class Card{
       nameFoto.textContent = this._name;
       this._popupOpen(popupFoto);
 
-      // ReferenceError: openPopup is not defined (если пытаться без this в конструкторе)
+      // ReferenceError: openPopup is not defined (если не передавать в конструктор)
       // openPopup(popupFoto);
     };
   }
