@@ -80,7 +80,7 @@ export default class FormValidator {
     this._formPrivateSelector.querySelector(this._formSelector).reset();
     // удаление ошибки
     this._formPrivateSelector.querySelectorAll('.popup__input-error').forEach(spanError =>{
-        spanError.textContent='';
+      this._hideInputError(spanError);
       })
     // удаление стиля ошибки
     this._formPrivateSelector.querySelectorAll(this._inputSelector).forEach(inputElement =>{
