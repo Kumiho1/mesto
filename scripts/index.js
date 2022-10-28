@@ -76,6 +76,12 @@ function handleListenEscape(evt) {
   };
 };
 
+// сброс формы 
+function resetForm(p) { 
+  // очистка инпутов 
+    p.querySelector('.popup__form').reset(); 
+  };
+
 //_____________________________
 //  добавление массива фотографий
 //_____________________________
@@ -109,8 +115,8 @@ function openPopupFoto(name, link) {
 //_____________________________
 
 buttonAddCard.addEventListener('click', ()=>{
-  const popupAddFotoValidate = new FormValidator(validationObject, '.popup-add-card').enableValidation();
-  popupAddFotoValidate.resetForm();
+  new FormValidator(validationObject, '.popup-add-card').enableValidation();
+  resetForm(popupAddCard); 
   openPopup(popupAddCard);
 });
 
@@ -139,8 +145,8 @@ buttonCloseAddFoto.addEventListener('click', () => {
 
 // нажатие кнопки редактирования
 buttonEdit.addEventListener('click', ()=>{  
-  const popupEditValidate = new FormValidator(validationObject, '.popup-edit').enableValidation();
-  popupEditValidate.resetForm();
+  new FormValidator(validationObject, '.popup-edit').enableValidation();
+  resetForm(popupEdit); 
   openPopup(popupEdit);
 
   // присвоение значения title инпутам
