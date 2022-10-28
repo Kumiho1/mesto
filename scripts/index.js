@@ -50,13 +50,13 @@ function addElementInContainer(element,container) {
 
 // показать попап
 function openPopup(p) {
-  document.addEventListener('keydown', handleListenEscape);
+  document.addEventListener('keydown', handeListenEscape);
   p.classList.add('popup_opened');
 };
 
 // скрыть попап 
 function closePopup(p) {
-  document.removeEventListener('keydown', handleListenEscape);
+  document.removeEventListener('keydown', handeListenEscape);
   p.classList.remove('popup_opened');
 };
 
@@ -70,7 +70,7 @@ popupList.forEach(p => {
 });
 
 // слушатель Esc
-function handleListenEscape(evt) {
+function handeListenEscape(evt) {
   if (evt.key === 'Escape') {
     closePopup(document.querySelector('.popup_opened'));
   };
@@ -81,17 +81,6 @@ function resetForm(p) {
   // очистка инпутов 
     p.querySelector('.popup__form').reset(); 
   };
-
-//_____________________________
-//  добавление массива фотографий
-//_____________________________
-
-// добавление массива фотографий
-initialCards.forEach(item => {
-  const card = new Card(item, '.elements__list', openPopupFoto);
-  const cardElement = card.createCard(item)
-  addElementInContainer(cardElement ,cardsContainer)
-});
 
 //_____________________________
 //  ПОПАП ФОТО
@@ -114,6 +103,12 @@ function openPopupFoto(name, link) {
 //  ПОПАП ДОБАВЛЕНИЯ КАРТОЧКИ
 //_____________________________
 
+// создание и добавление карточки в разметку
+function createAndAddCard(item) {
+  const card = new Card(item, '.elements__list', openPopupFoto).createCard()
+  addElementInContainer(card ,cardsContainer)
+}
+
 buttonAddCard.addEventListener('click', ()=>{
   new FormValidator(validationObject, '.popup-add-card').enableValidation();
   resetForm(popupAddCard); 
@@ -128,8 +123,7 @@ function submitHandlerFoto (evt) {
     name: nameFotoInput.value,
     link: linkFotoInput.value
   }
-  const card = new Card(dataCard, '.elements__list', openPopupFoto).createCard()
-  addElementInContainer(card, cardsContainer);
+  createAndAddCard(dataCard);
   closePopup(popupAddCard);
 };
 formElementAddFoto.addEventListener('submit', submitHandlerFoto);  
@@ -137,6 +131,15 @@ formElementAddFoto.addEventListener('submit', submitHandlerFoto);
 // закрытие попапа
 buttonCloseAddFoto.addEventListener('click', () => {
   closePopup(popupAddCard);
+});
+
+//_____________________________
+//  добавление массива фотографий
+//_____________________________
+
+// добавление массива фотографий
+initialCards.forEach(item => {
+  createAndAddCard(item);
 });
 
 //_____________________________
