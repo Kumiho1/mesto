@@ -82,6 +82,15 @@ function resetForm(p) {
     p.querySelector('.popup__form').reset(); 
   };
 
+  
+//_____________________________
+//  ПОДКЛЮЧЕНИЕ ВАЛИДАЦИИ
+//_____________________________
+const popupEditValidate = new FormValidator(validationObject, '.popup-edit')
+popupEditValidate.enableValidation();
+const popupAddFotoValidate = new FormValidator(validationObject, '.popup-add-card')
+popupAddFotoValidate.enableValidation();
+
 //_____________________________
 //  ПОПАП ФОТО
 //_____________________________
@@ -110,8 +119,8 @@ function createAndAddCard(item) {
 }
 
 buttonAddCard.addEventListener('click', ()=>{
-  new FormValidator(validationObject, '.popup-add-card').enableValidation();
   resetForm(popupAddCard); 
+  popupAddFotoValidate.deactivateButton();
   openPopup(popupAddCard);
 });
 
@@ -148,9 +157,10 @@ initialCards.forEach(item => {
 
 // нажатие кнопки редактирования
 buttonEdit.addEventListener('click', ()=>{  
-  new FormValidator(validationObject, '.popup-edit').enableValidation();
   resetForm(popupEdit); 
+  popupEditValidate.deactivateButton();
   openPopup(popupEdit);
+
 
   // присвоение значения title инпутам
   nameInput.value = titleName.textContent;

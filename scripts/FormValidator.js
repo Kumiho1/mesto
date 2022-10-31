@@ -73,5 +73,11 @@ export default class FormValidator {
     errorElement.classList.remove(this._errorClass);
     errorElement.textContent = '';
   };
+
+
+  deactivateButton() {
+    this._submitButtonSelector.classList.add(this._inactiveButtonClass); 
+    this._submitButtonSelector.disabled = true; 
+  }
 }
 
