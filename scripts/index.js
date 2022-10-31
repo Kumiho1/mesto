@@ -86,6 +86,7 @@ function resetForm(p) {
 //_____________________________
 //  ПОДКЛЮЧЕНИЕ ВАЛИДАЦИИ
 //_____________________________
+
 const popupEditValidate = new FormValidator(validationObject, '.popup-edit')
 popupEditValidate.enableValidation();
 const popupAddFotoValidate = new FormValidator(validationObject, '.popup-add-card')
