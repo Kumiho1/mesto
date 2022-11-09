@@ -47,9 +47,9 @@ const cardsContainer = document.querySelector('.elements');
 // //_____________________________
 
 // добавление кода в html элемент
-function addElementInContainer(element,container) { 
-  container.prepend(element);
-};
+// function addElementInContainer(element,container) { 
+//   container.prepend(element);
+// };
 
 // показать попап
 function openPopup(p) {
@@ -138,7 +138,7 @@ CardList.renderItems();
 buttonAddCard.addEventListener('click', ()=>{
   resetForm(popupAddCard); 
   popupAddFotoValidate.deactivateButton();
-  openPopup(popupAddCard);
+  new Popup('.popup-add-card').open();
 });
 
 // обработчик «отправки» формы добавления фото
@@ -167,7 +167,7 @@ buttonCloseAddFoto.addEventListener('click', () => {
 buttonEdit.addEventListener('click', ()=>{  
   resetForm(popupEdit); 
   popupEditValidate.deactivateButton();
-  openPopup(popupEdit);
+  new Popup('.popup-edit').open();
 
 
   // присвоение значения title инпутам
