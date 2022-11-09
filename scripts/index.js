@@ -1,5 +1,8 @@
 import FormValidator from './FormValidator.js';
 import Card from './Сard.js';
+import Section from './Section.js';
+import Popup from './Popup.js'
+
 
 // значения profile
 const titleName = document.querySelector('.profile__name');
@@ -102,7 +105,7 @@ closePopup(popupFoto);
 }); 
 
 // открытие попапа фото
-function openPopupFoto(name, link) {
+const openPopupFoto = (name, link) => {
       imgFoto.src = link;
       imgFoto.alt = `${name} на фотографии`;
       nameFoto.textContent = name;
@@ -113,11 +116,24 @@ function openPopupFoto(name, link) {
 //  ПОПАП ДОБАВЛЕНИЯ КАРТОЧКИ
 //_____________________________
 
+
 // создание и добавление карточки в разметку
-function createAndAddCard(item) {
-  const card = new Card(item, '.elements__list', openPopupFoto).createCard()
-  addElementInContainer(card ,cardsContainer)
-}
+
+
+//_____________________________
+//  добавление массива фотографий
+//_____________________________
+const CardList = new Section({
+    data: initialCards,
+    renderer: (item) => {
+      const card = new Card(item, '.elements__list', openPopupFoto).createCard();
+      CardList.addItem(card);
+    }
+  }, '.elements');
+
+CardList.renderItems();
+
+
 
 buttonAddCard.addEventListener('click', ()=>{
   resetForm(popupAddCard); 
@@ -141,15 +157,6 @@ formElementAddFoto.addEventListener('submit', submitHandlerFoto);
 // закрытие попапа
 buttonCloseAddFoto.addEventListener('click', () => {
   closePopup(popupAddCard);
-});
-
-//_____________________________
-//  добавление массива фотографий
-//_____________________________
-
-// добавление массива фотографий
-initialCards.forEach(item => {
-  createAndAddCard(item);
 });
 
 //_____________________________
