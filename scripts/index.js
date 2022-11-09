@@ -2,6 +2,7 @@ import FormValidator from './FormValidator.js';
 import Card from './Сard.js';
 import Section from './Section.js';
 import Popup from './Popup.js'
+import PopupWithImage from './PopupWithImage.js'
 
 
 // значения profile
@@ -51,33 +52,33 @@ const cardsContainer = document.querySelector('.elements');
 //   container.prepend(element);
 // };
 
-// показать попап
-function openPopup(p) {
-  document.addEventListener('keydown', handeListenEscape);
-  p.classList.add('popup_opened');
-};
+// // показать попап
+// function openPopup(p) {
+//   document.addEventListener('keydown', handeListenEscape);
+//   p.classList.add('popup_opened');
+// };
 
-// скрыть попап 
-function closePopup(p) {
-  document.removeEventListener('keydown', handeListenEscape);
-  p.classList.remove('popup_opened');
-};
+// // скрыть попап 
+// function closePopup(p) {
+//   document.removeEventListener('keydown', handeListenEscape);
+//   p.classList.remove('popup_opened');
+// };
 
-// закрытие по оверлею
-popupList.forEach(p => {
-  p.addEventListener('click', (evt)=> {
-    if (evt.target.classList.contains('popup')){
-      closePopup(p);
-    }
-  })
-});
+// // закрытие по оверлею
+// popupList.forEach(p => {
+//   p.addEventListener('click', (evt)=> {
+//     if (evt.target.classList.contains('popup')){
+//       closePopup(p);
+//     }
+//   })
+// });
 
-// слушатель Esc
-function handeListenEscape(evt) {
-  if (evt.key === 'Escape') {
-    closePopup(document.querySelector('.popup_opened'));
-  };
-};
+// // слушатель Esc
+// function handeListenEscape(evt) {
+//   if (evt.key === 'Escape') {
+//     closePopup(document.querySelector('.popup_opened'));
+//   };
+// };
 
 // сброс формы 
 function resetForm(p) { 
@@ -105,12 +106,14 @@ closePopup(popupFoto);
 }); 
 
 // открытие попапа фото
-const openPopupFoto = (name, link) => {
-      imgFoto.src = link;
-      imgFoto.alt = `${name} на фотографии`;
-      nameFoto.textContent = name;
-      openPopup(popupFoto);
-}
+const openPopupFoto = () => {new PopupWithImage().open();}
+
+// const openPopupFoto = (name, link) => {
+//       imgFoto.src = link;
+//       imgFoto.alt = `${name} на фотографии`;
+//       nameFoto.textContent = name;
+//       openPopup(popupFoto);
+// }
 
 //_____________________________
 //  ПОПАП ДОБАВЛЕНИЯ КАРТОЧКИ
@@ -154,10 +157,10 @@ function submitHandlerFoto (evt) {
 };
 formElementAddFoto.addEventListener('submit', submitHandlerFoto);  
 
-// закрытие попапа
-buttonCloseAddFoto.addEventListener('click', () => {
-  closePopup(popupAddCard);
-});
+// // закрытие попапа
+// buttonCloseAddFoto.addEventListener('click', () => {
+//   closePopup(popupAddCard);
+// });
 
 //_____________________________
 //  РЕДАКТИРОВАНИЕ ПРОФИЛЯ
@@ -181,12 +184,12 @@ function submitHandler (evt) {
   evt.preventDefault();
   titleName.textContent = nameInput.value; 
   titleJob.textContent = jobInput.value; 
-  closePopup(popupEdit);
+  // closePopup(popupEdit);
 };
 formElementEdit.addEventListener('submit', submitHandler);  
 
-// закрытие попапа редактирования
-buttonCloseEdit.addEventListener('click', () => {
-  closePopup(popupEdit); 
-});
+// // закрытие попапа редактирования
+// buttonCloseEdit.addEventListener('click', () => {
+//   closePopup(popupEdit); 
+// });
 
