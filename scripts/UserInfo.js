@@ -19,8 +19,8 @@ export default class UserInfo {
         return user
     }
 
-    setUserInfo ({name, link}) {
+    setUserInfo ({name, about}) {
         this._nameContaier.textContent = name
-        this._aboutContainer.textContent = link
+        this._aboutContainer.textContent = about
     }
 }
