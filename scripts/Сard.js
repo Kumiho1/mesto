@@ -3,11 +3,6 @@
 // //_____________________________
 
 // попап просмотра фото
-const popupFoto = document.querySelector('.popup-foto');
-
-const imgFoto = popupFoto.querySelector('.popup__foto');
-const nameFoto = popupFoto.querySelector('.popup__name');
-
 
 export default class Card{
     constructor(data, selector, handleCardClick) {

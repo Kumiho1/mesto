@@ -5,17 +5,6 @@ import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
 import UserInfo from './UserInfo.js';
 
-
-// попап редактирования профиля
-const popupEdit = document.querySelector('.popup-edit');
-const buttonEdit = document.querySelector('.profile__btn-edit');
-
-const nameInput = popupEdit.querySelector('.popup__input_type_name');
-const jobInput = popupEdit.querySelector('.popup__input_type_job');
-
-// попап добавления фото
-const buttonAddCard = document.querySelector('.profile__btn-add');
-
 //_____________________________
 //  ПОДКЛЮЧЕНИЕ ВАЛИДАЦИИ
 //_____________________________
@@ -29,12 +18,10 @@ popupAddFotoValidate.enableValidation();
 //  ПОПАП ФОТО
 //_____________________________
 
-
 // открытие попапа фото
 const openPopupFoto = (name, link) => {
   new PopupWithImage('.popup-foto').open(name, link);
 }
-
 
 //_____________________________
 //  ПОПАП ДОБАВЛЕНИЯ КАРТОЧКИ
@@ -51,6 +38,7 @@ const CardList = new Section({
 
 CardList.renderItems();
 
+// открытие попапа
 buttonAddCard.addEventListener('click', ()=>{
   popupAddFotoValidate.deactivateButton();
   new PopupWithForm('.popup-add-card', createAndAddCard).open();
@@ -79,7 +67,7 @@ buttonEdit.addEventListener('click', ()=>{
   nameInput.focus();
 });
 
-// // обработчик «отправки» формы редактирования профиля
+// обработчик «отправки» формы редактирования профиля
 const submitHandlerEdit = (dataUser) => { 
   userInfo.setUserInfo(dataUser) 
 };

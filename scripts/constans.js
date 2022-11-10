@@ -1,3 +1,14 @@
+// попап редактирования профиля
+const popupEdit = document.querySelector('.popup-edit');
+const buttonEdit = document.querySelector('.profile__btn-edit');
+
+const nameInput = popupEdit.querySelector('.popup__input_type_name');
+const jobInput = popupEdit.querySelector('.popup__input_type_job');
+
+// попап добавления фото
+const buttonAddCard = document.querySelector('.profile__btn-add');
+
+
 //_____________________________
 // карточки по умолчанию
 //_____________________________
