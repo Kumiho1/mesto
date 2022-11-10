@@ -13,14 +13,14 @@ export default class UserInfo {
 
     getUserInfo () {
         const user = {
-            name: this._name,
-            about: this._about
+            name: this._nameContaier.textContent,
+            about: this._aboutContainer.textContent
         }
         return user
     }
 
-    setUserInfo (name, about) {
+    setUserInfo ({name, link}) {
         this._nameContaier.textContent = name
-        this._aboutContainer.textContent = about
+        this._aboutContainer.textContent = link
     }
 }
