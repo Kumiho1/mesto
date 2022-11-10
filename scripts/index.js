@@ -100,13 +100,13 @@ popupAddFotoValidate.enableValidation();
 //  ПОПАП ФОТО
 //_____________________________
 
-// закрытие попапа фото
-buttonCloseFoto.addEventListener('click', () => {
-closePopup(popupFoto);
-}); 
+// // закрытие попапа фото
+// buttonCloseFoto.addEventListener('click', () => {
+// closePopup(popupFoto);
+// }); 
 
 // открытие попапа фото
-const openPopupFoto = () => {new PopupWithImage().open();}
+const openPopupFoto = (name, link) => {new PopupWithImage('.popup-foto').open(name, link);}
 
 // const openPopupFoto = (name, link) => {
 //       imgFoto.src = link;

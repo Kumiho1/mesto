@@ -49,7 +49,7 @@ export default class Card{
       }
   
     _openFoto = () => {
-      this._functionOpenPopup('.popup-foto', this._name, this._link);
+      this._functionOpenPopup( this._name, this._link);
     }
   
     _like = (evt) => {
