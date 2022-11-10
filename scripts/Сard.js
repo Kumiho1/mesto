@@ -10,11 +10,11 @@ const nameFoto = popupFoto.querySelector('.popup__name');
 
 
 export default class Card{
-    constructor(data, selector, functionOpenPopup) {
+    constructor(data, selector, handleCardClick) {
         this._name = data.name
         this._link = data.link
         this._selector = selector
-        this._functionOpenPopup = functionOpenPopup
+        this._handleCardClick = handleCardClick
         this._selectorLike = '.element__btn-like'
         this._selectorTrash = '.element__btn-trash'
         this._selectorFoto = '.element__foto'
@@ -49,7 +49,7 @@ export default class Card{
       }
   
     _openFoto = () => {
-      this._functionOpenPopup( this._name, this._link);
+      this._handleCardClick( this._name, this._link);
     }
   
     _like = (evt) => {

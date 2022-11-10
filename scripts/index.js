@@ -3,6 +3,7 @@ import Card from './Сard.js';
 import Section from './Section.js';
 import Popup from './Popup.js'
 import PopupWithImage from './PopupWithImage.js'
+import PopupWithForm from './PopupWithForm.js';
 
 
 // значения profile
@@ -43,48 +44,7 @@ const nameFoto = popupFoto.querySelector('.popup__name');
 const cardsContainer = document.querySelector('.elements');
 
 
-// //_____________________________
-// //  УНИВЕРСАЛЬНОЕ
-// //_____________________________
 
-// добавление кода в html элемент
-// function addElementInContainer(element,container) { 
-//   container.prepend(element);
-// };
-
-// // показать попап
-// function openPopup(p) {
-//   document.addEventListener('keydown', handeListenEscape);
-//   p.classList.add('popup_opened');
-// };
-
-// // скрыть попап 
-// function closePopup(p) {
-//   document.removeEventListener('keydown', handeListenEscape);
-//   p.classList.remove('popup_opened');
-// };
-
-// // закрытие по оверлею
-// popupList.forEach(p => {
-//   p.addEventListener('click', (evt)=> {
-//     if (evt.target.classList.contains('popup')){
-//       closePopup(p);
-//     }
-//   })
-// });
-
-// // слушатель Esc
-// function handeListenEscape(evt) {
-//   if (evt.key === 'Escape') {
-//     closePopup(document.querySelector('.popup_opened'));
-//   };
-// };
-
-// сброс формы 
-function resetForm(p) { 
-  // очистка инпутов 
-    p.querySelector('.popup__form').reset(); 
-  };
 
   
 //_____________________________
@@ -100,28 +60,14 @@ popupAddFotoValidate.enableValidation();
 //  ПОПАП ФОТО
 //_____________________________
 
-// // закрытие попапа фото
-// buttonCloseFoto.addEventListener('click', () => {
-// closePopup(popupFoto);
-// }); 
 
 // открытие попапа фото
 const openPopupFoto = (name, link) => {new PopupWithImage('.popup-foto').open(name, link);}
 
-// const openPopupFoto = (name, link) => {
-//       imgFoto.src = link;
-//       imgFoto.alt = `${name} на фотографии`;
-//       nameFoto.textContent = name;
-//       openPopup(popupFoto);
-// }
 
 //_____________________________
 //  ПОПАП ДОБАВЛЕНИЯ КАРТОЧКИ
 //_____________________________
-
-
-// создание и добавление карточки в разметку
-
 
 //_____________________________
 //  добавление массива фотографий
@@ -139,28 +85,28 @@ CardList.renderItems();
 
 
 buttonAddCard.addEventListener('click', ()=>{
-  resetForm(popupAddCard); 
   popupAddFotoValidate.deactivateButton();
-  new Popup('.popup-add-card').open();
+  new PopupWithForm('.popup-add-card', createAndAddCard).open();
 });
 
-// обработчик «отправки» формы добавления фото
-function submitHandlerFoto (evt) { 
-  evt.preventDefault();
-  // создание и добавление корточки
-  const dataCard = {
-    name: nameFotoInput.value,
-    link: linkFotoInput.value
-  }
-  createAndAddCard(dataCard);
-  closePopup(popupAddCard);
-};
-formElementAddFoto.addEventListener('submit', submitHandlerFoto);  
+// добавление карточки
+const createAndAddCard = (dataCard) => {
+  CardList.renderItem(dataCard);
+}
 
-// // закрытие попапа
-// buttonCloseAddFoto.addEventListener('click', () => {
+// // обработчик «отправки» формы добавления фото
+// function submitHandlerFoto (evt) { 
+//   evt.preventDefault();
+//   // создание и добавление корточки
+//   const dataCard = {
+//     name: nameFotoInput.value,
+//     link: linkFotoInput.value
+//   }
+//   createAndAddCard(dataCard);
 //   closePopup(popupAddCard);
-// });
+// };
+// formElementAddFoto.addEventListener('submit', submitHandlerFoto);  
+
 
 //_____________________________
 //  РЕДАКТИРОВАНИЕ ПРОФИЛЯ
@@ -168,10 +114,9 @@ formElementAddFoto.addEventListener('submit', submitHandlerFoto);
 
 // нажатие кнопки редактирования
 buttonEdit.addEventListener('click', ()=>{  
-  resetForm(popupEdit); 
+  // resetForm(popupEdit); 
   popupEditValidate.deactivateButton();
-  new Popup('.popup-edit').open();
-
+  new PopupWithForm('.popup-edit', submitHandlerEdit).open();
 
   // присвоение значения title инпутам
   nameInput.value = titleName.textContent;
@@ -179,17 +124,11 @@ buttonEdit.addEventListener('click', ()=>{
   nameInput.focus();
 });
 
-// обработчик «отправки» формы редактирования профиля
-function submitHandler (evt) { 
-  evt.preventDefault();
-  titleName.textContent = nameInput.value; 
-  titleJob.textContent = jobInput.value; 
-  // closePopup(popupEdit);
+// // обработчик «отправки» формы редактирования профиля
+const submitHandlerEdit = (userInfo) => { 
+  titleName.textContent = userInfo.name; 
+  titleJob.textContent = userInfo.link; 
 };
-formElementEdit.addEventListener('submit', submitHandler);  
+// formElementEdit.addEventListener('submit', submitHandler);  
 
-// // закрытие попапа редактирования
-// buttonCloseEdit.addEventListener('click', () => {
-//   closePopup(popupEdit); 
-// });
 
