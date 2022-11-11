@@ -1,9 +1,18 @@
-import FormValidator from './FormValidator.js';
-import Card from './Сard.js';
-import Section from './Section.js';
-import PopupWithImage from './PopupWithImage.js';
-import PopupWithForm from './PopupWithForm.js';
-import UserInfo from './UserInfo.js';
+import './index.css';
+import {buttonEdit,
+        nameInput,
+        jobInput,
+        buttonAddCard,
+        initialCards,
+        validationObject }
+  from '../scripts/constans.js' 
+
+import FormValidator from '../scripts/FormValidator.js';
+import Card from '../scripts/Сard.js';
+import Section from '../scripts/Section.js';
+import PopupWithImage from '../scripts/PopupWithImage.js';
+import PopupWithForm from '../scripts/PopupWithForm.js';
+import UserInfo from '../scripts/UserInfo.js';
 
 //_____________________________
 //  ПОДКЛЮЧЕНИЕ ВАЛИДАЦИИ

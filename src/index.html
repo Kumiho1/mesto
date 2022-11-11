@@ -2,18 +2,17 @@
 <html lang="ru">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='./images/icon-star.png' rel="icon" type="image/icon"> 
-    <link rel="stylesheet" href="./pages/index.css">
+    <link href="<%=require('./images/icon-star.png')%>" rel="icon" type="image/icon"> 
     <title lang="en">Mesto</title>
 </head>
 <body>
     <div class="page">
         <header class="header">
-            <img class="header__logo" src="./images/header_logo.svg" alt="логотип 'Место'">
+            <img class="header__logo" src="<%=require('./images/header_logo.svg')%>" alt="логотип 'Место'">
         </header>
         <main class="main">
             <section class="profile">
-                <img class="profile__avatar" src="./images/profile_foto.jpg" alt="аватар пользователя">
+                <img class="profile__avatar" src="<%=require('./images/profile_foto.jpg')%>" alt="аватар пользователя">
                 <div class="profile__container">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
                     <button class="profile__btn-edit" type="button" aria-label="открыть окно редактирования профиля"></button>
@@ -84,7 +83,5 @@
             </div>
         </div>
     </div>
-    <script src="./scripts/constans.js"></script>
-    <script type="module" src="./scripts/index.js"></script>
 </body>
 </html>

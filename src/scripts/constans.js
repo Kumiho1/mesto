@@ -1,18 +1,18 @@
 // попап редактирования профиля
-const popupEdit = document.querySelector('.popup-edit');
-const buttonEdit = document.querySelector('.profile__btn-edit');
 
-const nameInput = popupEdit.querySelector('.popup__input_type_name');
-const jobInput = popupEdit.querySelector('.popup__input_type_job');
+export const buttonEdit = document.querySelector('.profile__btn-edit');
+
+export const nameInput = document.querySelector('.popup-edit').querySelector('.popup__input_type_name');
+export const jobInput = document.querySelector('.popup-edit').querySelector('.popup__input_type_job');
 
 // попап добавления фото
-const buttonAddCard = document.querySelector('.profile__btn-add');
+export const buttonAddCard = document.querySelector('.profile__btn-add');
 
 
 //_____________________________
 // карточки по умолчанию
 //_____________________________
-const initialCards = [
+export const initialCards = [
     {
       name: 'Италия',
       link: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
@@ -43,7 +43,7 @@ const initialCards = [
 //  для валидации
 //_____________________________
 
-const validationObject = {
+export const validationObject = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__btn-save',
