@@ -24,12 +24,19 @@ const popupAddFotoValidate = new FormValidator(validationObject, '.popup-add-car
 popupAddFotoValidate.enableValidation();
 
 //_____________________________
+//  ПОПАПЫ
+//_____________________________
+const popupWithImage = new PopupWithImage('.popup-foto')
+const popupWithCard = new PopupWithForm('.popup-add-card', generateCard)
+const popupWithProfile = new PopupWithForm('.popup-edit', submitHandlerEdit);
+
+//_____________________________
 //  ПОПАП ФОТО
 //_____________________________
 
 // открытие попапа фото
 const openPopupFoto = (name, link) => {
-  new PopupWithImage('.popup-foto').open(name, link);
+  new popupWithImage.open(name, link);
 }
 
 //_____________________________
@@ -37,25 +44,25 @@ const openPopupFoto = (name, link) => {
 //_____________________________
 
 //  добавление массива фотографий
-const CardList = new Section({
+const cardList = new Section({
     data: initialCards,
     renderer: (item) => {
-      const card = new Card(item, '.elements__list', openPopupFoto).createCard();
-      CardList.addItem(card);
+      const card = new Card(item, '.elements__list', openPopupFoto).createCard()
+      cardList.addItem(card)
     }
   }, '.elements');
 
-CardList.renderItems();
+cardList.renderItems();
 
 // открытие попапа
 buttonAddCard.addEventListener('click', ()=>{
   popupAddFotoValidate.deactivateButton();
-  new PopupWithForm('.popup-add-card', createAndAddCard).open();
+  popupWithCard.open();
 });
 
 // добавление карточки
-const createAndAddCard = (dataCard) => {
-  CardList.renderItem(dataCard);
+function generateCard (dataCard) {
+  cardList.renderItem(dataCard);
 }
 
 //_____________________________
@@ -67,7 +74,7 @@ const userInfo = new UserInfo({nameInput,jobInput})
 // нажатие кнопки редактирования
 buttonEdit.addEventListener('click', ()=>{  
   popupEditValidate.deactivateButton();
-  new PopupWithForm('.popup-edit', submitHandlerEdit).open();
+  popupWithProfile.open();
 
   // присвоение значения title инпутам
   const user =  userInfo.getUserInfo()
@@ -77,7 +84,7 @@ buttonEdit.addEventListener('click', ()=>{
 });
 
 // обработчик «отправки» формы редактирования профиля
-const submitHandlerEdit = (dataUser) => { 
+function submitHandlerEdit (dataUser) { 
   userInfo.setUserInfo(dataUser) 
 };
 
