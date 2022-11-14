@@ -38,7 +38,7 @@ const popupWithProfile = new PopupWithForm('.popup-edit', submitHandlerEdit);
 
 // открытие попапа фото
 const openPopupFoto = (name, link) => {
-  new popupWithImage.open(name, link);
+  popupWithImage.open(name, link);
 }
 
 //_____________________________
@@ -60,6 +60,7 @@ cardList.renderItems(initialCards);
 buttonAddCard.addEventListener('click', ()=>{
   popupAddFotoValidate.deactivateButton();
   popupWithCard.open();
+  popupAddFotoValidate.hideAllInputErrors();
 });
 
 // добавление карточки
@@ -79,12 +80,13 @@ function addCardFromPopup (dataCard) {
 //  РЕДАКТИРОВАНИЕ ПРОФИЛЯ
 //_____________________________
 
-const userInfo = new UserInfo({nameInput,jobInput,nameInfo,jobInfo})
+const userInfo = new UserInfo({nameInput, jobInput, nameInfo, jobInfo})
 
 // нажатие кнопки редактирования
 buttonEdit.addEventListener('click', ()=>{  
   popupEditValidate.deactivateButton();
   popupWithProfile.open();
+  popupEditValidate.hideAllInputErrors();
 
   // присвоение значения title инпутам
   const user =  userInfo.getUserInfo()
