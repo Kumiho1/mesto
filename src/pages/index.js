@@ -1,18 +1,20 @@
 import './index.css';
 import {buttonEdit,
         nameInput,
+        nameInfo,
         jobInput,
+        jobInfo,
         buttonAddCard,
         initialCards,
         validationObject }
-  from '../scripts/constans.js' 
+  from '../utils/constans.js' 
 
-import FormValidator from '../scripts/FormValidator.js';
-import Card from '../scripts/Сard.js';
-import Section from '../scripts/Section.js';
-import PopupWithImage from '../scripts/PopupWithImage.js';
-import PopupWithForm from '../scripts/PopupWithForm.js';
-import UserInfo from '../scripts/UserInfo.js';
+import FormValidator from '../components/FormValidator.js';
+import Card from '../components/Сard.js';
+import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 
 //_____________________________
 //  ПОДКЛЮЧЕНИЕ ВАЛИДАЦИИ
@@ -27,7 +29,7 @@ popupAddFotoValidate.enableValidation();
 //  ПОПАПЫ
 //_____________________________
 const popupWithImage = new PopupWithImage('.popup-foto')
-const popupWithCard = new PopupWithForm('.popup-add-card', generateCard)
+const popupWithCard = new PopupWithForm('.popup-add-card', addCardFromPopup)
 const popupWithProfile = new PopupWithForm('.popup-edit', submitHandlerEdit);
 
 //_____________________________
@@ -47,12 +49,12 @@ const openPopupFoto = (name, link) => {
 const cardList = new Section({
     data: initialCards,
     renderer: (item) => {
-      const card = new Card(item, '.elements__list', openPopupFoto).createCard()
-      cardList.addItem(card)
+      const card = generateCard(item);
+      addCard(card);
     }
   }, '.elements');
 
-cardList.renderItems();
+cardList.renderItems(initialCards);
 
 // открытие попапа
 buttonAddCard.addEventListener('click', ()=>{
@@ -62,14 +64,22 @@ buttonAddCard.addEventListener('click', ()=>{
 
 // добавление карточки
 function generateCard (dataCard) {
-  cardList.renderItem(dataCard);
+  return new Card(dataCard, '.elements__list', openPopupFoto).createCard()
+}
+
+function addCard(card) {
+  cardList.addItem(card)
+}
+
+function addCardFromPopup (dataCard) {
+  addCard(generateCard (dataCard));
 }
 
 //_____________________________
 //  РЕДАКТИРОВАНИЕ ПРОФИЛЯ
 //_____________________________
 
-const userInfo = new UserInfo({nameInput,jobInput})
+const userInfo = new UserInfo({nameInput,jobInput,nameInfo,jobInfo})
 
 // нажатие кнопки редактирования
 buttonEdit.addEventListener('click', ()=>{  
@@ -87,5 +97,3 @@ buttonEdit.addEventListener('click', ()=>{
 function submitHandlerEdit (dataUser) { 
   userInfo.setUserInfo(dataUser) 
 };
-
-

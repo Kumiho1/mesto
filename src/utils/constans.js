@@ -5,6 +5,9 @@ export const buttonEdit = document.querySelector('.profile__btn-edit');
 export const nameInput = document.querySelector('.popup-edit').querySelector('.popup__input_type_name');
 export const jobInput = document.querySelector('.popup-edit').querySelector('.popup__input_type_job');
 
+export const nameInfo = document.querySelector('.profile__name');
+export const jobInfo = document.querySelector('.profile__job')
+
 // попап добавления фото
 export const buttonAddCard = document.querySelector('.profile__btn-add');
 

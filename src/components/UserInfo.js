@@ -4,11 +4,11 @@
 // //_____________________________
 
 export default class UserInfo {
-    constructor ({name, about}) {
-        this._name = name
-        this._about = about
-        this._nameContaier = document.querySelector('.profile__name')
-        this._aboutContainer = document.querySelector('.profile__job')
+    constructor ({nameInput, jobInput, nameInfo, jobInfo}) {
+        this._name = nameInput
+        this._about = jobInput
+        this._nameContaier = nameInfo
+        this._aboutContainer = jobInfo
     }
 
     getUserInfo () {
