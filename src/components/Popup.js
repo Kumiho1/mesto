@@ -4,31 +4,34 @@
 
 export default class Popup {
     constructor (selectorPopup) {
-        this.popup = document.querySelector(selectorPopup)
+        this._popup = document.querySelector(selectorPopup)
+        this._btnCloseSelector = '.popup__btn-close'
+        this._popupOpenSelector = 'popup_opened'
+
     }
 
     setEventListeners() {
-        this.popup  .addEventListener('click', this._handleListenOverlay)
+        this._popup  .addEventListener('click', this._handleListenOverlay)
         document    .addEventListener('keydown', this._handeListenEscape);
-        this.popup.querySelector('.popup__btn-close')
+        this._popup.querySelector(this._btnCloseSelector)
                     .addEventListener('click', this.close)
     }
 
     _removeEventListeners() {
         document    .removeEventListener('keydown', this._handeListenEscape);
-        this.popup  .removeEventListener('click', this._handleListenOverlay);
-        this.popup.querySelector('.popup__btn-close')
+        this._popup  .removeEventListener('click', this._handleListenOverlay);
+        this._popup.querySelector(this._btnCloseSelector)
                     .removeEventListener('click', this.close)
     }
 
     open() {
-        this.popup.classList.add('popup_opened');
+        this._popup.classList.add(this._popupOpenSelector);
         this.setEventListeners();
     }
 
-    close () {
+    close() {
         this._removeEventListeners();
-        this.popup.classList.remove('popup_opened');
+        this._popup.classList.remove(this._popupOpenSelector);
     }
 
     _handeListenEscape = (evt) => {
