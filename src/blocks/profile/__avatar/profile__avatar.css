@@ -4,4 +4,5 @@
     border-radius: 50%;
     grid-area: foto;
     margin: 0 auto;
+    object-fit: cover;
 }
