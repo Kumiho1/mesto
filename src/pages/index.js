@@ -76,7 +76,7 @@ function addCardFromPopup (dataCard) {
 //  РЕДАКТИРОВАНИЕ ПРОФИЛЯ
 //_____________________________
 
-const userInfo = new UserInfo({nameInput, jobInput, nameInfo, jobInfo})
+const userInfo = new UserInfo({nameInfo, jobInfo})
 
 // нажатие кнопки редактирования
 buttonEdit.addEventListener('click', ()=>{  
