@@ -29,7 +29,7 @@ export default class Popup {
         this.setEventListeners();
     }
 
-    close() {
+    close () {
         this._removeEventListeners();
         this._popup.classList.remove(this._popupOpenSelector);
     }

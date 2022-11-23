@@ -19,7 +19,7 @@ export default class Api {
             })
         .then(res => res.json())
         .then((result) => {
-            // добавление карточек
+        // добавление карточек
             this._cardList.renderItems(result);
         }); 
     }
@@ -31,14 +31,10 @@ export default class Api {
                 authorization: this._authorization
             }
             })
-        .then(res => res.json())
-        .then((res) => {
-        const dataUser = {
-            name: res.name,
-            about: res.about
-        }
-        this._userInfo.setUserInfo(dataUser)
-        document.querySelector('.profile__avatar').src = res.avatar
+            .then(res => res.json())
+            .then((res) => {
+                this._userInfo.setUserInfo(res)
+              document.querySelector('.profile__avatar').src = res.avatar
         }); 
     }
 

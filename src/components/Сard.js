@@ -9,6 +9,7 @@ export default class Card{
         this._name = data.name
         this._link = data.link
         this._counter = data.likes.length
+        this._owner = data.owner._id
         this._selector = selector
         this._handleCardClick = handleCardClick
         this._selectorLike = '.element__btn-like'

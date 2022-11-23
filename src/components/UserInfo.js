@@ -4,9 +4,9 @@
 // //_____________________________
 
 export default class UserInfo {
-    constructor ({nameInfo, jobInfo}) {
-        this._nameContaier = nameInfo
-        this._aboutContainer = jobInfo
+    constructor (name, about) {
+        this._nameContaier = name
+        this._aboutContainer = about
     }
 
     getUserInfo () {

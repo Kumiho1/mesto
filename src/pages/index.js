@@ -36,7 +36,7 @@ const popupWithProfile = new PopupWithForm('.popup-edit', submitHandlerEdit)
 const popup = (selector) => new Popup(selector);
 
 // профиль
-const userInfo = new UserInfo({nameInfo, jobInfo})
+const userInfo = new UserInfo(nameInfo, jobInfo)
 
 // список карточек
 const cardList = new Section({
@@ -124,3 +124,4 @@ api.startPageProfile();
 api.startPageCards();
 
 
+ 
