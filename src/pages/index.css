@@ -34,6 +34,7 @@
 @import url(../blocks/element/__btn-like/element__btn-like.css);
 @import url(../blocks/element/__btn-like/_active/element__btn-like_active.css);
 @import url(../blocks/element/__btn-trash/element__btn-trash.css);
+@import url(../blocks/element/__btn-trash/_visible/element__btn-trash_visible.css);
 @import url(../blocks/element/__counter/element__counter.css);
 
 /* popup */

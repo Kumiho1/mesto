@@ -5,7 +5,7 @@
 // попап просмотра фото
 
 export default class Card{
-    constructor(data, selector, handleCardClick, popupDelete) {
+    constructor(data, selector, handleCardClick, popupDelete, api) {
         this._name = data.name
         this._link = data.link
         this._counter = data.likes.length
@@ -18,6 +18,7 @@ export default class Card{
         this._selectorCounter = '.element__counter'
         this._popupDelete = popupDelete
         this._popupDeleteSaveButton = document.querySelector('.popup-delete').querySelector('.popup__btn-save')
+        this._api = api
     }
   
     createCard() {
@@ -30,6 +31,13 @@ export default class Card{
       cardFoto.alt = `${this._name} на фотографии`;
       this._element.querySelector(this._selectorCounter).textContent = this._counter
       
+      console.log(this._api.getOwnerId())
+      if (this._api.getOwnerId() === this._owner) {
+        console.log(1)
+        this._element.querySelector(this._selectorTrash).classlist.add('.element__btn-trash_visible')
+
+      }
+
       return this._element;
     };
   

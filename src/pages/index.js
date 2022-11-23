@@ -75,7 +75,7 @@ buttonAddCard.addEventListener('click', ()=>{
 
 // добавление карточки
 function generateCard (dataCard) {
-  return new Card(dataCard, '.elements__list', openPopupFoto, popup).createCard()
+  return new Card(dataCard, '.elements__list', openPopupFoto, popup, api).createCard()
 }
 
 function addCard(card) {
@@ -123,5 +123,3 @@ api.startPageProfile();
 // загрузка карточек
 api.startPageCards();
 
-
- 

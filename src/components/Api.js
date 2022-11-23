@@ -34,7 +34,7 @@ export default class Api {
             .then(res => res.json())
             .then((res) => {
                 this._userInfo.setUserInfo(res)
-              document.querySelector('.profile__avatar').src = res.avatar
+                document.querySelector('.profile__avatar').src = res.avatar
         }); 
     }
 
@@ -62,5 +62,19 @@ export default class Api {
         })
     .then(res => res.json())
     .then((res) => {console.log(res)})
+    }
+
+    // проверка соответствия id
+    getOwnerId () {
+        fetch(`${this._startRequest}/users/me`, {
+            headers: {
+                authorization: this._authorization
+            }
+            })
+            .then(res => res.json())
+            .then((res) => {
+                console.log(res._id)
+                return res._id 
+        }); 
     }
 }
