@@ -12,6 +12,7 @@ import {buttonEdit,
 import FormValidator from '../components/FormValidator.js';
 import Card from '../components/Сard.js';
 import Section from '../components/Section.js';
+import Popup from '../components/Popup.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
@@ -30,8 +31,8 @@ popupAddFotoValidate.enableValidation();
 //_____________________________
 const popupWithImage = new PopupWithImage('.popup-foto')
 const popupWithCard = new PopupWithForm('.popup-add-card', addCardFromPopup)
-const popupWithProfile = new PopupWithForm('.popup-edit', submitHandlerEdit);
-
+const popupWithProfile = new PopupWithForm('.popup-edit', submitHandlerEdit)
+const popup = (selector) => new Popup(selector);
 //_____________________________
 //  ПОПАП ФОТО
 //_____________________________
@@ -56,7 +57,7 @@ buttonAddCard.addEventListener('click', ()=>{
 
 // добавление карточки
 function generateCard (dataCard) {
-  return new Card(dataCard, '.elements__list', openPopupFoto).createCard()
+  return new Card(dataCard, '.elements__list', openPopupFoto, popup).createCard()
 }
 
 function addCard(card) {
@@ -111,6 +112,7 @@ function submitHandlerEdit (dataUser) {
 })
 };
 
+// список карточек
 const cardList = new Section({
   data: initialCards,
   renderer: (item) => {
@@ -131,15 +133,7 @@ fetch('https://mesto.nomoreparties.co/v1/cohort-54/cards', {
 })
   .then(res => res.json())
   .then((result) => {
-    
-    //  добавление массива фотографий
-    const cardList = new Section({
-      data: result,
-      renderer: (item) => {
-        const card = generateCard(item);
-        cardList.addItem(card);
-      }
-    }, '.elements');
+// добавление карточек
     cardList.renderItems(result);
   }); 
 

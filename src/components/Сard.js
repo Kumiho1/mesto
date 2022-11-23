@@ -5,7 +5,7 @@
 // попап просмотра фото
 
 export default class Card{
-    constructor(data, selector, handleCardClick) {
+    constructor(data, selector, handleCardClick, popupDelete) {
         this._name = data.name
         this._link = data.link
         this._selector = selector
@@ -13,6 +13,8 @@ export default class Card{
         this._selectorLike = '.element__btn-like'
         this._selectorTrash = '.element__btn-trash'
         this._selectorFoto = '.element__foto'
+        this._popupDelete = popupDelete
+        this._popupDeleteSaveButton = document.querySelector('.popup-delete').querySelector('.popup__btn-save')
     }
   
     createCard() {
@@ -40,7 +42,7 @@ export default class Card{
     _setEventListeners() {
       this._element.querySelector(this._selectorFoto).addEventListener('click', this._openFoto);
       this._element.querySelector(this._selectorLike).addEventListener ('click', this._like);
-      this._element.querySelector(this._selectorTrash).addEventListener ('click', this._remove);
+      this._element.querySelector(this._selectorTrash).addEventListener ('click', this._openPopupRemove);
       }
   
     _openFoto = () => {
@@ -51,6 +53,11 @@ export default class Card{
       evt.target.classList.toggle('element__btn-like_active')
     }
   
+    _openPopupRemove = () => {
+      this._popupDelete('.popup-delete').open()
+      this._popupDeleteSaveButton.addEventListener('click', this._remove)
+    }
+
     _remove = () => {
       this._element.remove();
     }
