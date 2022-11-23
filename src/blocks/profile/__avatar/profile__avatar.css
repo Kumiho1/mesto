@@ -5,8 +5,5 @@
     grid-area: foto;
     margin: 0 auto;
     object-fit: cover;
-}
-
-.profile__avatar:hover {
-    background: rgba(0, 0, 0, 0.8)
+    cursor: pointer;
 }

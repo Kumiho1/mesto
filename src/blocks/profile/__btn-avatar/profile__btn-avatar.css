@@ -1,0 +1,16 @@
+.profile__btn-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    grid-area: foto;
+    margin: 0 auto;
+    visibility: hidden;
+    transition: visibility 1s ease;
+    background: rgba(0, 0, 0, 0.8);
+    background-image: url(../../../images/profile_avatar.svg);
+    z-index: 1;
+}
+
+.profile__btn-avatar:hover {
+    visibility: visible;
+}
