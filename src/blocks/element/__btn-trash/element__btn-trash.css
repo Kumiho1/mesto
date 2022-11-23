@@ -9,6 +9,7 @@
     background-color: transparent;
     transition: opacity 1s ease;
     cursor: pointer;
+    visibility: hidden;
 }
 
 .element__btn-trash:hover {

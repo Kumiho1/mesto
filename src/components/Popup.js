@@ -11,17 +11,17 @@ export default class Popup {
     }
 
     setEventListeners() {
-        this._popup  .addEventListener('click', this._handleListenOverlay)
         document    .addEventListener('keydown', this._handeListenEscape);
+        this._popup .addEventListener('click', this._handleListenOverlay);
         this._popup.querySelector(this._btnCloseSelector)
-                    .addEventListener('click', this.close)
+                    .addEventListener('click', this.close);
     }
 
     _removeEventListeners() {
         document    .removeEventListener('keydown', this._handeListenEscape);
-        this._popup  .removeEventListener('click', this._handleListenOverlay);
+        this._popup .removeEventListener('click', this._handleListenOverlay);
         this._popup.querySelector(this._btnCloseSelector)
-                    .removeEventListener('click', this.close)
+                    .removeEventListener('click', this.close);
     }
 
     open() {
