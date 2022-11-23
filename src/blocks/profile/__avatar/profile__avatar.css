@@ -6,4 +6,5 @@
     margin: 0 auto;
     object-fit: cover;
     cursor: pointer;
+    z-index: 0;
 }
