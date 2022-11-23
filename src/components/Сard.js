@@ -8,11 +8,13 @@ export default class Card{
     constructor(data, selector, handleCardClick, popupDelete) {
         this._name = data.name
         this._link = data.link
+        this._counter = data.likes.length
         this._selector = selector
         this._handleCardClick = handleCardClick
         this._selectorLike = '.element__btn-like'
         this._selectorTrash = '.element__btn-trash'
         this._selectorFoto = '.element__foto'
+        this._selectorCounter = '.element__counter'
         this._popupDelete = popupDelete
         this._popupDeleteSaveButton = document.querySelector('.popup-delete').querySelector('.popup__btn-save')
     }
@@ -25,6 +27,7 @@ export default class Card{
       this._element.querySelector('.element__name').textContent = this._name;
       cardFoto.src = this._link;
       cardFoto.alt = `${this._name} на фотографии`;
+      this._element.querySelector(this._selectorCounter).textContent = this._counter
       
       return this._element;
     };
@@ -58,7 +61,9 @@ export default class Card{
       this._popupDeleteSaveButton.addEventListener('click', this._remove)
     }
 
-    _remove = () => {
+    _remove = (evt) => {
+      evt.preventDefault();
       this._element.remove();
+      this._popupDelete('.popup-delete').close()
     }
   }
