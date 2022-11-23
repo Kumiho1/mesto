@@ -63,12 +63,18 @@ function addCard(card) {
   cardList.addItem(card)
 }
 
-// function addCard(card) {
-//   cardList.addItem(card)
-// }
-
 function addCardFromPopup (dataCard) {
   addCard(generateCard (dataCard));
+  fetch('https://mesto.nomoreparties.co/v1/cohort-54/cards', {
+  method: 'POST',
+  headers: {
+    authorization: 'b54228be-8e0f-45cf-a3af-cf408891c36e',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(dataCard)
+})
+.then(res => res.json())
+.then((res) => {console.log(res)})
   
 }
 
@@ -105,6 +111,13 @@ function submitHandlerEdit (dataUser) {
 })
 };
 
+const cardList = new Section({
+  data: initialCards,
+  renderer: (item) => {
+    const card = generateCard(item);
+    cardList.addItem(card);
+  }
+}, '.elements');
 
 //_____________________________
 //  API
@@ -127,7 +140,6 @@ fetch('https://mesto.nomoreparties.co/v1/cohort-54/cards', {
         cardList.addItem(card);
       }
     }, '.elements');
-
     cardList.renderItems(result);
   }); 
 
