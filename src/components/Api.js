@@ -3,78 +3,75 @@
 //___________________________________
 
 export default class Api {
-    constructor(userInfo, cardList){
-        this._startRequest = 'https://mesto.nomoreparties.co/v1/cohort-54'
-        this._authorization ='b54228be-8e0f-45cf-a3af-cf408891c36e'
-        this._userInfo = userInfo
+    constructor({baseUrl, headers}, userInfo, cardList){
         this._cardList = cardList
-    }
+        this._userInfo = userInfo
+        this._startRequest = baseUrl
+        this._headers = headers
 
-    // запрос карточек с сервера
-    startPageCards () {
-        fetch(`${this._startRequest}/cards`, {
-            headers: {
-                authorization: this._authorization
+        this._res = (res) => {
+            if (res.ok) {
+                return res.json();
             }
-            })
-        .then(res => res.json())
-        .then((result) => {
-        // добавление карточек
-            this._cardList.renderItems(result);
-        }); 
+            return Promise.reject(`Ошибка: ${res.status}`)
+        }
     }
 
     // загрузка данных пользователя
     startPageProfile () {
         fetch(`${this._startRequest}/users/me`, {
-            headers: {
-                authorization: this._authorization
-            }
+            headers: this._headers,
             })
-            .then(res => res.json())
-            .then((res) => {
-                this._userInfo.setUserInfo(res)
-                document.querySelector('.profile__avatar').src = res.avatar
-        }); 
+        .then(this._res)
+        // .then((res) => {
+        //     console.log(res)
+        //     // userId = res._id;
+        //     // console.log(userId);
+        //     this._userInfo.setUserInfo(res)
+        //     document.querySelector('.profile__avatar').src = res.avatar
+        // });   
     }
-
-    // изменение профайла
-    editUserInfo () {
-        fetch(`${this._startRequest}/users/me`, {
-            method: 'PATCH',
-            headers: {
-              authorization: this._authorization,
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(this._userInfo.getUserInfo())
-        })
-    }
-
-    // сохранить карточку
-    sendCard = (dataCard) => {
-    fetch(`${this._startRequest}/cards`, {
-        method: 'POST',
-        headers: {
-            authorization: this._authorization,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(dataCard)
-        })
-    .then(res => res.json())
-    .then((res) => {console.log(res)})
-    }
-
-    // проверка соответствия id
-    getOwnerId () {
-        fetch(`${this._startRequest}/users/me`, {
-            headers: {
-                authorization: this._authorization
-            }
+    
+    // запрос карточек с сервера
+    startPageCards() {
+        fetch(`${this._startRequest}/cards`, {
+            headers: this._headers,
             })
-            .then(res => res.json())
-            .then((res) => {
-                console.log(res._id)
-                return res._id 
-        }); 
+        .then(this._res).then((result) => {
+            // добавление карточек
+                this._cardList.renderItems(result);
+            }); ; 
     }
+
+    // // изменение профайла
+    // editUserInfo () {
+    //     fetch(`${this._startRequest}/users/me`, {
+    //         method: 'PATCH',
+    //         headers: this._headers,
+    //         body: JSON.stringify(this._userInfo.getUserInfo())
+    //     })
+    // }
+
+    // // сохранить карточку
+    // sendCard = (dataCard) => {
+    // fetch(`${this._startRequest}/cards`, {
+    //     method: 'POST',
+    //     headers: this._headers,
+    //     body: JSON.stringify(dataCard)
+    //     })
+    // .then(res => res.json())
+    // .then((res) => {console.log(res)})
+    // }
+
+    // // проверка соответствия id
+    // getOwnerId () {
+    //     fetch(`${this._startRequest}/users/me`, {
+    //         headers: this._headers,
+    //         })
+    //         .then(res => res.json())
+    //         .then((res) => {
+    //             // console.log("id user: " + res._id)
+    //             return res._id 
+    //     }); 
+    // }
 }
