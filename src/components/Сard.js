@@ -32,15 +32,17 @@ export default class Card{
       
       this._element.querySelector(this._selectorCounter).textContent = this._counter
       
-      if (this._isOwnedId()) {
-        this._element.querySelector(this._selectorTrash).classlist.add('.element__btn-trash_visible')
+      if (this._userIdCard != this._userId) {
+        this._element.querySelector(this._selectorTrash).remove()
       }
+
+      console.log(this._userIdCard != this._userId)
 
       return this._element;
     };
 
     _isOwnedId() {
-      this._userIdCard == this._userId ? 1 : 0
+      this._userIdCard === this._userId ? 1 : 0
     }
   
     _getTemplate() {
