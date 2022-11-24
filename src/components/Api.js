@@ -23,13 +23,13 @@ export default class Api {
             headers: this._headers,
             })
         .then(this._res)
-        // .then((res) => {
-        //     console.log(res)
-        //     // userId = res._id;
-        //     // console.log(userId);
-        //     this._userInfo.setUserInfo(res)
-        //     document.querySelector('.profile__avatar').src = res.avatar
-        // });   
+        .then((res) => {
+            console.log(res)
+            // userId = res._id;
+            // console.log(userId);
+            this._userInfo.setUserInfo(res)
+            document.querySelector('.profile__avatar').src = res.avatar
+        });   
     }
     
     // запрос карточек с сервера

@@ -132,12 +132,12 @@ function submitHandlerEdit (dataUser) {
 // загрузка данных пользователя
 let userId 
 api.startPageProfile()
-  .then((res) => {
-    userId = res._id;
-    // console.log(userId);
-    this._userInfo.setUserInfo(res)
-    document.querySelector('.profile__avatar').src = res.avatar
-}); 
+//   .then((res) => {
+//     userId = res._id;
+//     // console.log(userId);
+//     this._userInfo.setUserInfo(res)
+//     document.querySelector('.profile__avatar').src = res.avatar
+// }); 
 console.log(userId);
 
 // загрузка карточек
