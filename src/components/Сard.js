@@ -8,7 +8,6 @@ export default class Card{
     constructor(data, selector, handleCardClick, popupDelete, userId, counterLike) {
         this._name = data.name
         this._link = data.link
-        this._data = data
         this._counter = counterLike
         this._selector = selector
         this._handleCardClick = handleCardClick
@@ -19,6 +18,7 @@ export default class Card{
         this._popupDelete = popupDelete
         this._popupDeleteSaveButton = document.querySelector('.popup-delete').querySelector('.popup__btn-save')
         this._userId = userId
+        this._userIdCard = data.owner._id
     }
   
     createCard() {
@@ -32,12 +32,16 @@ export default class Card{
       
       this._element.querySelector(this._selectorCounter).textContent = this._counter
       
-      // if (this._userId === this._data.owner._id) {
-      //   this._element.querySelector(this._selectorTrash).classlist.add('.element__btn-trash_visible')
-      // }
+      if (this._isOwnedId()) {
+        this._element.querySelector(this._selectorTrash).classlist.add('.element__btn-trash_visible')
+      }
 
       return this._element;
     };
+
+    _isOwnedId() {
+      this._userIdCard == this._userId ? 1 : 0
+    }
   
     _getTemplate() {
       const cardElement = document

@@ -149,8 +149,9 @@ function addCard(card) {
 
 // добавление карточки из попапа
 function addCardFromPopup (dataCard) {
-  console.log(dataCard)
-  // dataCard.owner._id = userId
-  addCard(generateCard (dataCard));
-  api.sendCard(dataCard);
+  api.sendCard(dataCard)
+  .then((res) => {
+    addCard(generateCard (res));
+  })
+  // .finally(()=>{renderLoading('false')})
 }

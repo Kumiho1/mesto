@@ -57,14 +57,13 @@ export default class Api {
 
     // сохранить карточку
     sendCard = (dataCard) => {
-    fetch(`${this._startRequest}/cards`, {
+     return fetch(`${this._startRequest}/cards`, {
         method: 'POST',
         headers: this._headers,
         body: JSON.stringify(dataCard)
         })
-    .then(res => res.json())
-    .then((res) => {console.log(res)})
-    // .finally(()=>{renderLoading('false')})
+    .then(this._res)
+    
     }
 
     // проверка соответствия id
