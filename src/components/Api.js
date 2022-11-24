@@ -19,59 +19,63 @@ export default class Api {
 
     // загрузка данных пользователя
     startPageProfile () {
-        fetch(`${this._startRequest}/users/me`, {
+        return fetch(`${this._startRequest}/users/me`, {
             headers: this._headers,
             })
         .then(this._res)
-        .then((res) => {
-            console.log(res)
-            // userId = res._id;
-            // console.log(userId);
-            this._userInfo.setUserInfo(res)
-            document.querySelector('.profile__avatar').src = res.avatar
-        });   
+        // .then((res) => {
+        //     // userId = res._id;
+        //     // console.log(userId);
+        //     this._userInfo.setUserInfo(res)
+        //     document.querySelector('.profile__avatar').src = res.avatar
+        // })
+        ;   
     }
     
     // запрос карточек с сервера
     startPageCards() {
-        fetch(`${this._startRequest}/cards`, {
+        return fetch(`${this._startRequest}/cards`, {
             headers: this._headers,
             })
-        .then(this._res).then((result) => {
-            // добавление карточек
-                this._cardList.renderItems(result);
-            }); ; 
+        .then(this._res)
+        // .then((result) => {
+        //     // добавление карточек
+        //         this._cardList.renderItems(result);
+        //     })
+            ;  
     }
 
-    // // изменение профайла
-    // editUserInfo () {
-    //     fetch(`${this._startRequest}/users/me`, {
-    //         method: 'PATCH',
-    //         headers: this._headers,
-    //         body: JSON.stringify(this._userInfo.getUserInfo())
-    //     })
-    // }
+    // изменение профайла
+    editUserInfo () {
+        fetch(`${this._startRequest}/users/me`, {
+            method: 'PATCH',
+            headers: this._headers,
+            body: JSON.stringify(this._userInfo.getUserInfo())
+        })
+        // .finally(()=>{renderLoading('false')})
+    }
 
-    // // сохранить карточку
-    // sendCard = (dataCard) => {
-    // fetch(`${this._startRequest}/cards`, {
-    //     method: 'POST',
-    //     headers: this._headers,
-    //     body: JSON.stringify(dataCard)
-    //     })
-    // .then(res => res.json())
-    // .then((res) => {console.log(res)})
-    // }
+    // сохранить карточку
+    sendCard = (dataCard) => {
+    fetch(`${this._startRequest}/cards`, {
+        method: 'POST',
+        headers: this._headers,
+        body: JSON.stringify(dataCard)
+        })
+    .then(res => res.json())
+    .then((res) => {console.log(res)})
+    // .finally(()=>{renderLoading('false')})
+    }
 
-    // // проверка соответствия id
-    // getOwnerId () {
-    //     fetch(`${this._startRequest}/users/me`, {
-    //         headers: this._headers,
-    //         })
-    //         .then(res => res.json())
-    //         .then((res) => {
-    //             // console.log("id user: " + res._id)
-    //             return res._id 
-    //     }); 
-    // }
+    // проверка соответствия id
+    getOwnerId () {
+        fetch(`${this._startRequest}/users/me`, {
+            headers: this._headers,
+            })
+            .then(res => res.json())
+            .then((res) => {
+                // console.log("id user: " + res._id)
+                return res._id 
+        }); 
+    }
 }

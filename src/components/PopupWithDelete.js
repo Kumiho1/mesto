@@ -2,9 +2,9 @@
 //  ОТКРЫТИЕ И ЗАКРЫТИЕ ПОПАПА 
 //  ПОДТВЕРЖДЕНИЯ УДАЛЕНИЯ
 //___________________________________
-import PopupWithForm from './PopupWithForm.js'
+import Popup from './Popup.js'
 
-export default class PopupWithDelete extends PopupWithForm {
+export default class PopupWithDelete extends Popup {
     constructor (selectorPopup) {
         super(selectorPopup)
     }

@@ -69,37 +69,6 @@ const openPopupFoto = (name, link) => {
 }
 
 
-
-//_____________________________
-//  ПОПАП ДОБАВЛЕНИЯ КАРТОЧКИ
-//_____________________________
-
-// открытие попапа
-buttonAddCard.addEventListener('click', ()=>{
-  popupAddFotoValidate.deactivateButton();
-  popupWithCard.open();
-  popupAddFotoValidate.hideAllInputErrors();
-});
-
-// добавление карточки
-function generateCard (dataCard) {
-  // console.log(dataCard)
-  const counterLike = 0
-  return new Card(dataCard, '.elements__list', openPopupFoto, popupWithDelete, userId, counterLike,).createCard()
-}
-
-function addCard(card) {
-  cardList.addItem(card)
-}
-
-// добавление карточки из попапа
-function addCardFromPopup (dataCard) {
-  console.log(dataCard)
-  // dataCard.owner._id = userId
-  addCard(generateCard (dataCard));
-  api.sendCard(dataCard);
-}
-
 //_____________________________
 //  РЕДАКТИРОВАНИЕ ПРОФИЛЯ
 //_____________________________
@@ -130,20 +99,58 @@ function submitHandlerEdit (dataUser) {
 //_____________________________
 
 // загрузка данных пользователя
-let userId 
+let userId
 api.startPageProfile()
-//   .then((res) => {
-//     userId = res._id;
-//     // console.log(userId);
-//     this._userInfo.setUserInfo(res)
-//     document.querySelector('.profile__avatar').src = res.avatar
-// }); 
-console.log(userId);
+  .then((res) => {
+    userId = res._id;
+    userInfo.setUserInfo(res)
+    document.querySelector('.profile__avatar').src = res.avatar
+})
+; 
 
 // загрузка карточек
 api.startPageCards()
-  // .then((result) => {
-  // // добавление карточек
-  //     this._cardList.renderItems(result);
-  // }); 
+  .then((result) => {
+  // добавление карточек
+      cardList.renderItems(result);
+  })
+  ;
 
+// функция загрузка данных 
+  function renderLoading(isLoading) {
+    if  (isLoading) {
+      //  кнопка в форме .textContent = "Сохранение..."
+    } else {
+      //  кнопка в форме .textContent = "Создать"
+    }
+   }
+
+//_____________________________
+//  ПОПАП ДОБАВЛЕНИЯ КАРТОЧКИ
+//_____________________________
+
+// открытие попапа
+buttonAddCard.addEventListener('click', ()=>{
+  popupAddFotoValidate.deactivateButton();
+  popupWithCard.open();
+  popupAddFotoValidate.hideAllInputErrors();
+});
+
+// добавление карточки
+function generateCard (dataCard) {
+  // console.log(dataCard)
+  const counterLike = 0
+  return new Card(dataCard, '.elements__list', openPopupFoto, popupWithDelete, userId, counterLike,).createCard()
+}
+
+function addCard(card) {
+  cardList.addItem(card)
+}
+
+// добавление карточки из попапа
+function addCardFromPopup (dataCard) {
+  console.log(dataCard)
+  // dataCard.owner._id = userId
+  addCard(generateCard (dataCard));
+  api.sendCard(dataCard);
+}

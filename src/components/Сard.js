@@ -10,7 +10,6 @@ export default class Card{
         this._link = data.link
         this._data = data
         this._counter = counterLike
-        // this._owner = data.owner._id
         this._selector = selector
         this._handleCardClick = handleCardClick
         this._selectorLike = '.element__btn-like'
@@ -32,8 +31,6 @@ export default class Card{
       cardFoto.alt = `${this._name} на фотографии`;
       
       this._element.querySelector(this._selectorCounter).textContent = this._counter
-        
-      console.log(this._userId)
       
       // if (this._userId === this._data.owner._id) {
       //   this._element.querySelector(this._selectorTrash).classlist.add('.element__btn-trash_visible')
