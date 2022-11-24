@@ -16,7 +16,8 @@ import Popup from '../components/Popup.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
-import Api from '../components/Api.js'
+import Api from '../components/Api.js';
+import PopupWithDelete from '../components/PopupWithDelete.js';
 
 //_____________________________
 //  ПОДКЛЮЧЕНИЕ ВАЛИДАЦИИ
@@ -33,7 +34,7 @@ popupAddFotoValidate.enableValidation();
 const popupWithImage = new PopupWithImage('.popup-foto')
 const popupWithCard = new PopupWithForm('.popup-add-card', addCardFromPopup)
 const popupWithProfile = new PopupWithForm('.popup-edit', submitHandlerEdit)
-const popup = (selector) => new Popup(selector);
+const popupWithDelete =  new PopupWithDelete('.popup-delete');
 
 // профиль
 const userInfo = new UserInfo(nameInfo, jobInfo)
@@ -75,7 +76,7 @@ buttonAddCard.addEventListener('click', ()=>{
 
 // добавление карточки
 function generateCard (dataCard) {
-  return new Card(dataCard, '.elements__list', openPopupFoto, popup, api).createCard()
+  return new Card(dataCard, '.elements__list', openPopupFoto, popupWithDelete, api).createCard()
 }
 
 function addCard(card) {

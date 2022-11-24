@@ -5,7 +5,7 @@
 // попап просмотра фото
 
 export default class Card{
-    constructor(data, selector, handleCardClick, popupDelete, api) {
+    constructor(data, selector, handleCardClick, popupDelete, api, ) {
         this._name = data.name
         this._link = data.link
         this._counter = data.likes.length
@@ -66,8 +66,7 @@ export default class Card{
     }
   
     _openPopupRemove = () => {
-      this._popupDelete('.popup-delete').open()
-      this._popupDeleteSaveButton.addEventListener('click', this._remove)
+      this._popupDelete.open()
     }
 
     _remove = (evt) => {
