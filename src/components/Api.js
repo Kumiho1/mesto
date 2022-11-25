@@ -14,7 +14,7 @@ export default class Api {
                 return res.json();
             }
             return Promise.reject(`Ошибка: ${res.status}`)
-        }
+        };
     }
 
     // загрузка данных пользователя
@@ -22,14 +22,7 @@ export default class Api {
         return fetch(`${this._startRequest}/users/me`, {
             headers: this._headers,
             })
-        .then(this._res)
-        // .then((res) => {
-        //     // userId = res._id;
-        //     // console.log(userId);
-        //     this._userInfo.setUserInfo(res)
-        //     document.querySelector('.profile__avatar').src = res.avatar
-        // })
-        ;   
+        .then(this._res);   
     }
     
     // запрос карточек с сервера
@@ -37,17 +30,12 @@ export default class Api {
         return fetch(`${this._startRequest}/cards`, {
             headers: this._headers,
             })
-        .then(this._res)
-        // .then((result) => {
-        //     // добавление карточек
-        //         this._cardList.renderItems(result);
-        //     })
-            ;  
+        .then(this._res);  
     }
 
     // изменение профайла
     editUserInfo () {
-        fetch(`${this._startRequest}/users/me`, {
+        fetch(`${this._startRequest}users/me`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify(this._userInfo.getUserInfo())
@@ -57,24 +45,23 @@ export default class Api {
 
     // сохранить карточку
     sendCard = (dataCard) => {
-     return fetch(`${this._startRequest}/cards`, {
+     return fetch(`${this._startRequest}cards`, {
         method: 'POST',
         headers: this._headers,
         body: JSON.stringify(dataCard)
         })
-    .then(this._res)
-    
+    .then(this._res);
     }
 
-    // проверка соответствия id
-    getOwnerId () {
-        fetch(`${this._startRequest}/users/me`, {
-            headers: this._headers,
-            })
-            .then(res => res.json())
-            .then((res) => {
-                // console.log("id user: " + res._id)
-                return res._id 
-        }); 
+    // удалить карточку
+    deleteCard = (idCard) => {
+        return fetch(`${this._startRequest}${idCard}`, {
+            method: 'DELETE',
+            headers: this._headers
+        })
+        .then(this._res); 
+        // .finally(()=>{renderLoading('false')})
+
     }
+
 }

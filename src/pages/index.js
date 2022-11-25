@@ -34,15 +34,17 @@ popupAddFotoValidate.enableValidation();
 const popupWithImage = new PopupWithImage('.popup-foto')
 const popupWithCard = new PopupWithForm('.popup-add-card', addCardFromPopup)
 const popupWithProfile = new PopupWithForm('.popup-edit', submitHandlerEdit)
-const popupWithDelete =  new PopupWithDelete('.popup-delete');
+const popupWithDelete =  new PopupWithDelete('.popup-delete', deleteCard);
 
 // профиль
 
 const userInfo = new UserInfo(nameInfo, jobInfo)
 
+let cardId
 // список карточек
 const cardList = new Section({
   renderer: (item) => {
+    cardId = item._id
     const card = generateCard(item);
     cardList.addItem(card);
   }
@@ -53,7 +55,7 @@ const cardList = new Section({
 //_____________________________
 
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-54',
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-54/',
   headers: {
     authorization: 'b54228be-8e0f-45cf-a3af-cf408891c36e',
     'Content-Type': 'application/json'
@@ -112,7 +114,7 @@ api.startPageProfile()
 api.startPageCards()
   .then((result) => {
   // добавление карточек
-      cardList.renderItems(result);
+      cardList.renderItems(result.reverse());
   })
   ;
 
@@ -138,9 +140,7 @@ buttonAddCard.addEventListener('click', ()=>{
 
 // добавление карточки
 function generateCard (dataCard) {
-  // console.log(dataCard)
-  const counterLike = 0
-  return new Card(dataCard, '.elements__list', openPopupFoto, popupWithDelete, userId, counterLike,).createCard()
+  return new Card(dataCard, '.elements__list', openPopupFoto, popupWithDelete, userId, cardId).createCard()
 }
 
 function addCard(card) {
@@ -154,4 +154,9 @@ function addCardFromPopup (dataCard) {
     addCard(generateCard (res));
   })
   // .finally(()=>{renderLoading('false')})
+}
+
+// удаление карточки
+function deleteCard (idCard) {
+  api.deleteCard(idCard).then(()=> console.log('Deleted successful'))
 }

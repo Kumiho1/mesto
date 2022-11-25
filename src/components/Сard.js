@@ -5,10 +5,10 @@
 // попап просмотра фото
 
 export default class Card{
-    constructor(data, selector, handleCardClick, popupDelete, userId, counterLike) {
+    constructor(data, selector, handleCardClick, popupDelete, userId, cardId) {
         this._name = data.name
         this._link = data.link
-        this._counter = counterLike
+        this._counter = data.likes.length
         this._selector = selector
         this._handleCardClick = handleCardClick
         this._selectorLike = '.element__btn-like'
@@ -19,6 +19,7 @@ export default class Card{
         this._popupDeleteSaveButton = document.querySelector('.popup-delete').querySelector('.popup__btn-save')
         this._userId = userId
         this._userIdCard = data.owner._id
+        this._idCard = cardId
     }
   
     createCard() {
@@ -32,17 +33,15 @@ export default class Card{
       
       this._element.querySelector(this._selectorCounter).textContent = this._counter
       
-      if (this._userIdCard != this._userId) {
+      if (this._isOwnedCard()) {
         this._element.querySelector(this._selectorTrash).remove()
       }
-
-      console.log(this._userIdCard != this._userId)
 
       return this._element;
     };
 
-    _isOwnedId() {
-      this._userIdCard === this._userId ? 1 : 0
+    _isOwnedCard() {
+      return this._userIdCard !== this._userId
     }
   
     _getTemplate() {
@@ -70,12 +69,12 @@ export default class Card{
     }
   
     _openPopupRemove = () => {
+      this._popupDelete.setEventListeners(this._idCard)
       this._popupDelete.open()
-      if (this._popupDelete._submitForm()) {this._remove}
     }
 
-    _remove = (evt) => {
-      evt.preventDefault();
-      this._element.remove();
-    }
+    // _remove = () => {
+    //   console.log(this._idCard)
+    //   this._popupDelete.setEventListeners(this._idCard)
+    // }
   }
