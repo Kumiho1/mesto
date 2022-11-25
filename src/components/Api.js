@@ -13,7 +13,7 @@ export default class Api {
             if (res.ok) {
                 return res.json();
             }
-            return Promise.reject(`Ошибка: ${res.status}`)
+            return Promise.reject(`Ошибка: ${res.status} ${res.statusText}`)
         };
     }
 
@@ -55,7 +55,7 @@ export default class Api {
 
     // удалить карточку
     deleteCard = (idCard) => {
-        return fetch(`${this._startRequest}${idCard}`, {
+        return fetch(`${this._startRequest}cards/${idCard}`, {
             method: 'DELETE',
             headers: this._headers
         })
@@ -64,4 +64,21 @@ export default class Api {
 
     }
 
+    // поставить лайк
+    sendLike = (idCard) => {
+        return fetch(`${this._startRequest}cards/${idCard}/likes`, {
+            method: 'PUT',
+            headers: this._headers
+        })
+        .then(this._res); 
+    }
+
+    // удалить лайк
+    deleteLike = (idCard) => {
+        return fetch(`${this._startRequest}cards/${idCard}/likes`, {
+            method: 'DELETE',
+            headers: this._headers
+        })
+        .then(this._res); 
+    }
 }

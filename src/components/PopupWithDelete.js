@@ -11,25 +11,18 @@ export default class PopupWithDelete extends Popup {
         this._functionSubmit = functionSubmit
     }
 
-    open() {
-        this._popup.classList.add(this._popupOpenSelector);
+    open(idCard, card) {
+        this._popup.classList.add(this._popupOpenSelector); 
+        this.setEventListeners(idCard, card)
     }
 
-    setEventListeners (idCard) {
+    setEventListeners (idCard, card) {
         super.setEventListeners();
-        // this._formElement.addEventListener('submit', () => {
-        //     this._submitForm(evt, idCard)
-        // })
-        console.log(idCard)
-        this._popup.querySelector('.popup__btn-save').addEventListener('click', () => {
-            this._submitForm(idCard)
+        this._popup.querySelector('.popup__btn-save').addEventListener('click', (evt) => {
+            evt.preventDefault();
+            this._functionSubmit(idCard, card)
+            this.close();
         })
     }
-
-    _submitForm = (idCard) => {
-        console.log(idCard)
-        // evt.preventDefault();
-        this._functionSubmit(idCard)
-        this.close();
-    } 
+    
 }

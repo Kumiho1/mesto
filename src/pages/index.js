@@ -140,7 +140,8 @@ buttonAddCard.addEventListener('click', ()=>{
 
 // добавление карточки
 function generateCard (dataCard) {
-  return new Card(dataCard, '.elements__list', openPopupFoto, popupWithDelete, userId, cardId).createCard()
+  const card = new Card(dataCard, '.elements__list', openPopupFoto, popupWithDelete, userId, cardId, api).createCard()
+  return card
 }
 
 function addCard(card) {
@@ -156,7 +157,11 @@ function addCardFromPopup (dataCard) {
   // .finally(()=>{renderLoading('false')})
 }
 
-// удаление карточки
-function deleteCard (idCard) {
-  api.deleteCard(idCard).then(()=> console.log('Deleted successful'))
+
+function deleteCard (idCard,card) {
+  api.deleteCard(idCard)
+    .then(()=> {
+      card.remove()
+      console.log('Удалено')
+    })
 }
