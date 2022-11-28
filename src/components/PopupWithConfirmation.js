@@ -9,20 +9,39 @@ export default class PopupWithConfirmation extends Popup {
         super(selectorPopup)
         this._formElement = this._popup.querySelector('.popup__form')
         this._functionSubmit = functionSubmit
+        this._btnSave = this._popup.querySelector('.popup__btn-save')
     }
 
     open(idCard, card) {
-        this._popup.classList.add(this._popupOpenSelector); 
-        this.setEventListeners(idCard, card)
+        super.open()
+        this._setEventListeners(idCard, card)
     }
 
-    setEventListeners (idCard, card) {
-        super.setEventListeners();
-        this._popup.querySelector('.popup__btn-save').addEventListener('click', (evt) => {
+    _setEventListeners (idCard, card) {
+        super._setEventListeners();
+        this._btnSave.addEventListener('click', (evt) => {
             evt.preventDefault();
             this._functionSubmit(idCard, card)
-            this.close();
         })
     }
+
+    _removeEventListeners() {
+        super._removeEventListeners();
+        this._btnSave._removeEventListener('click', (evt) => {
+            evt.preventDefault();
+            this._functionSubmit(idCard, card)
+        })
+    }
+
+    // _setEventListeners (idCard, card) {
+    //     super._setEventListeners();
+    //     this._btnSave.addEventListener('click', this._submitForm)
+    // }
+        
+    // _submitForm = (evt) => {
+    //         evt.preventDefault();
+    //         this._functionSubmit(idCard, card)
+    //         this.close();
+    // }
     
 }

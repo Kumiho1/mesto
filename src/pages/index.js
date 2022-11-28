@@ -97,11 +97,19 @@ buttonEdit.addEventListener('click', ()=>{
 });
 
 // обработчик «отправки» формы редактирования профиля
-function submitHandlerEdit (dataUser) { 
-  userInfo.setUserInfo(dataUser) 
+function submitHandlerEdit (dataUser) {  
   // сохранение имени на сервере
-  api.editUserInfo()
-    .finally(()=>{popupWithProfile.renderLoading('false')})
+  api.editUserInfo(dataUser)
+    .then ((dataUserRes)=> {
+    userInfo.setUserInfo(dataUserRes)
+    })
+    .then (()=>{
+      popupWithProfile.close()
+    })
+    .catch((err) => {
+        console.log(err); 
+      })
+    .finally(()=>{popupWithProfile.renderLoading(false)})
 };
 
 // редактирование аватара
@@ -113,15 +121,24 @@ buttonAvatarEdit.addEventListener('click', ()=>{
 
 // обработчик «отправки» формы редактирования аватара
 function submitHandlerEditAvatar (avatarInfo) { 
-  avatarContainer.src = avatarInfo.avatar
   // сохранение аватара на сервере
   api.editUserAvatar(avatarInfo.avatar)
-    .finally(()=>{popupWithAvatar.renderLoading('false')})
+    .then((profile)=>{
+      userInfo.setUserInfo(profile)
+    })
+    // .then (()=>{
+    //   popupWithConfirmation.close()
+    // })
+    .catch((err) => {
+      console.log(err); 
+    }) 
+    .finally(()=>{popupWithAvatar.renderLoading(false)})
 };
 
 //_____________________________
 //  API
 //_____________________________
+
 
 // загрузка данных пользователя
 let userId
@@ -140,8 +157,12 @@ const startPageCards = api.startPageCards()
   // добавление карточек
       cardList.renderItems(result.reverse());
   })
+  .then(()=>{console.log('cards');})
 
 Promise.all([startPageProfile, startPageCards])
+  .catch((err) => {
+    console.log(err); 
+  }) 
 
 //_____________________________
 //  ПОПАП ДОБАВЛЕНИЯ КАРТОЧКИ
@@ -170,7 +191,12 @@ function addCardFromPopup (dataCard) {
   .then((res) => {
     addCard(generateCard (res));
   })
-  .finally(()=>{popupWithCard.renderLoading('false')})
+  .finally(()=>{
+    popupWithCard.renderLoading(false)
+    setTimeout(() => {
+      popupWithCard.close()
+    }, 100);
+  })
 }
 
 // удаление карточки
@@ -178,6 +204,11 @@ function deleteCard (idCard,card) {
   api.deleteCard(idCard)
     .then(()=> {
       card.remove()
+    })
+    .then(()=>{
+      setTimeout(() => {
+        popupWithConfirmation.close()
+      }, 100);
     })
     .catch((err) => {
       console.log(err); 

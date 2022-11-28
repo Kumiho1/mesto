@@ -5,14 +5,15 @@
 // попап просмотра фото
 
 export default class Card{
-    constructor(data, selector, handleCardClick, popupDelete, userId, cardId, api) {
+    constructor(data, selectorContainerCards, handleCardClick, popupDelete, userId, cardId, api) {
         this._name = data.name
         this._link = data.link
         this._counter = data.likes.length
         this._likes = data.likes
-        this._selector = selector
+        this._containerCards =  document.querySelector(selectorContainerCards)
         this._handleCardClick = handleCardClick
         this._selectorLike = '.element__btn-like'
+        // this._containerLike = this._element.querySelector(this._selectorLike)
         this._selectorTrash = '.element__btn-trash'
         this._selectorFoto = '.element__foto'
         this._selectorCounter = '.element__counter'
@@ -22,16 +23,24 @@ export default class Card{
         this._userIdCard = data.owner._id
         this._idCard = cardId
         this._api = api
+        // this._element = () => {
+        //   const cardElement = 
+        //     this._containerCards
+        //     .content
+        //     .querySelector('.element')
+        //     .cloneNode(true);
+        //   return cardElement;
+        // }
+        // console.log(this._element);
     }
   
     createCard() {
       this._element = this._getTemplate();
       this._setEventListeners();
-  
-      const cardFoto =  this._element.querySelector(this._selectorFoto);
+      this._cardFoto = this._element.querySelector(this._selectorFoto);
       this._element.querySelector('.element__name').textContent = this._name;
-      cardFoto.src = this._link;
-      cardFoto.alt = `${this._name} на фотографии`;
+      this._cardFoto.src = this._link;
+      this._cardFoto.alt = `${this._name} на фотографии`;
       
       this._element.querySelector(this._selectorCounter).textContent = this._counter
       
@@ -54,8 +63,8 @@ export default class Card{
     }
   
     _getTemplate() {
-      const cardElement = document
-        .querySelector(this._selector)
+      const cardElement = 
+        this._containerCards
         .content
         .querySelector('.element')
         .cloneNode(true);

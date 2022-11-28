@@ -4,13 +4,13 @@
 
 export default class FormValidator {
   constructor (validationObject, formPrivateSelector) {
-    this._formPrivateSelector = document.querySelector(formPrivateSelector)
+    this._formContainer = document.querySelector(formPrivateSelector)
     this._formSelector = validationObject.formSelector
     this._inputSelector = validationObject.inputSelector
     this._inactiveButtonClass = validationObject.inactiveButtonClass
     this._inputErrorClass = validationObject.inputErrorClass
     this._errorClass = validationObject.errorClass
-    this._fieldSet = this._formPrivateSelector.querySelector(validationObject.fieldSet)
+    this._fieldSet = this._formContainer.querySelector(validationObject.fieldSet)
     this._inputList = Array.from(this._fieldSet.querySelectorAll(this._inputSelector))
     this._submitButtonSelector = this._fieldSet.querySelector(validationObject.submitButtonSelector)
   }
