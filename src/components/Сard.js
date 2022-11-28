@@ -17,7 +17,7 @@ export default class Card{
         this._selectorFoto = '.element__foto'
         this._selectorCounter = '.element__counter'
         this._popupDelete = popupDelete
-        this._popupDeleteSaveButton = document.querySelector('.popup-delete').querySelector('.popup__btn-save')
+        this._popupDeleteSaveButton = document.querySelector('.popup-confirmation').querySelector('.popup__btn-save')
         this._userId = userId
         this._userIdCard = data.owner._id
         this._idCard = cardId
@@ -80,6 +80,9 @@ export default class Card{
             this._assignLikeCount(res)
             evt.target.classList.remove('element__btn-like_active')
           })
+          .catch((err) => {
+            console.log(err); 
+          });
         
      } else {
         this._api.sendLike(this._idCard)
@@ -87,6 +90,9 @@ export default class Card{
             this._assignLikeCount(res)
             evt.target.classList.add('element__btn-like_active')
           })
+          .catch((err) => {
+            console.log(err); 
+          });
      }
     }
 

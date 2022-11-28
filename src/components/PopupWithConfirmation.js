@@ -4,7 +4,7 @@
 //___________________________________
 import Popup from './Popup.js'
 
-export default class PopupWithDelete extends Popup {
+export default class PopupWithConfirmation extends Popup {
     constructor (selectorPopup, functionSubmit) {
         super(selectorPopup)
         this._formElement = this._popup.querySelector('.popup__form')

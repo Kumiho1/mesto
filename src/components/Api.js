@@ -24,7 +24,10 @@ export default class Api {
         return fetch(`${this._startRequest}/users/me`, {
             headers: this._headers,
             })
-        .then(this._res);   
+        .then(this._res)
+        .catch((err) => {
+            console.log(err); 
+        });    
     }
     
     // запрос карточек с сервера
@@ -32,41 +35,51 @@ export default class Api {
         return fetch(`${this._startRequest}/cards`, {
             headers: this._headers,
             })
-        .then(this._res);  
+        .then(this._res)
+        .catch((err) => {
+            console.log(err); 
+        });   
     }
 
     // изменение профайла
     editUserInfo () {
-        fetch(`${this._startRequest}users/me`, {
+        return fetch(`${this._startRequest}users/me`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify(this._userInfo.getUserInfo())
         })
-        .then(this._res);
-        // .finally(()=>{renderLoading('false')})
+        .then(this._res)
+        .catch((err) => {
+            console.log(err); 
+          }); 
     }
 
      // изменение аватара в профиле
      editUserAvatar (avatar) {
-        fetch(`${this._startRequest}users/me/avatar`, {
+        return fetch(`${this._startRequest}users/me/avatar`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
                 avatar: avatar
             })
         })
-        .then(this._res);
-        // .finally(()=>{renderLoading('false')})
+        .then(this._res)
+        .catch((err) => {
+            console.log(err); 
+        }); 
     }
 
     // сохранить карточку
     sendCard = (dataCard) => {
-     return fetch(`${this._startRequest}cards`, {
-        method: 'POST',
-        headers: this._headers,
-        body: JSON.stringify(dataCard)
-        })
-    .then(this._res);
+        return fetch(`${this._startRequest}cards`, {
+            method: 'POST',
+            headers: this._headers,
+            body: JSON.stringify(dataCard)
+            })
+        .then(this._res)
+        .catch((err) => {
+            console.log(err); 
+        }); 
     }
 
     // удалить карточку
@@ -75,9 +88,7 @@ export default class Api {
             method: 'DELETE',
             headers: this._headers
         })
-        .then(this._res); 
-        // .finally(()=>{renderLoading('false')})
-
+        .then(this._res)
     }
 
     // поставить лайк
@@ -86,7 +97,10 @@ export default class Api {
             method: 'PUT',
             headers: this._headers
         })
-        .then(this._res); 
+        .then(this._res)
+        .catch((err) => {
+            console.log(err); 
+        }); 
     }
 
     // удалить лайк
@@ -95,6 +109,9 @@ export default class Api {
             method: 'DELETE',
             headers: this._headers
         })
-        .then(this._res); 
+        .then(this._res)
+        .catch((err) => {
+            console.log(err); 
+        });  
     }
 }

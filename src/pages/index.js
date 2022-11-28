@@ -6,7 +6,6 @@ import {buttonEdit,
         jobInfo,
         avatarContainer,
         buttonAddCard,
-        initialCards,
         validationObject,
         buttonAvatarEdit }
   from '../utils/constans.js' 
@@ -14,12 +13,11 @@ import {buttonEdit,
 import FormValidator from '../components/FormValidator.js';
 import Card from '../components/Сard.js';
 import Section from '../components/Section.js';
-import Popup from '../components/Popup.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
-import PopupWithDelete from '../components/PopupWithDelete.js';
+import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 
 //_____________________________
 //  ПОДКЛЮЧЕНИЕ ВАЛИДАЦИИ
@@ -29,6 +27,8 @@ const popupEditValidate = new FormValidator(validationObject, '.popup-edit')
 popupEditValidate.enableValidation();
 const popupAddFotoValidate = new FormValidator(validationObject, '.popup-add-card')
 popupAddFotoValidate.enableValidation();
+const popupAvatarValidate = new FormValidator(validationObject, '.popup-avatar')
+popupAvatarValidate.enableValidation();
 
 //_____________________________
 //  ПОПАПЫ
@@ -36,13 +36,17 @@ popupAddFotoValidate.enableValidation();
 const popupWithImage = new PopupWithImage('.popup-foto')
 const popupWithCard = new PopupWithForm('.popup-add-card', addCardFromPopup)
 const popupWithProfile = new PopupWithForm('.popup-edit', submitHandlerEdit)
-const popupWithDelete =  new PopupWithDelete('.popup-delete', deleteCard);
+const popupWithConfirmation =  new PopupWithConfirmation('.popup-confirmation', deleteCard);
 const popupWithAvatar = new PopupWithForm('.popup-avatar', submitHandlerEditAvatar)
 
-// профиль
-
+//_____________________________
+//  ПРОФИЛЬ
+//_____________________________
 const userInfo = new UserInfo(nameInfo, jobInfo, avatarContainer)
 
+//_____________________________
+//  СЕКЦИЯ КАРТОЧЕК
+//_____________________________
 let cardId
 // список карточек
 const cardList = new Section({
@@ -64,6 +68,7 @@ const api = new Api({
     'Content-Type': 'application/json'
   }
 } , userInfo, cardList)
+
 //_____________________________
 //  ПОПАП ФОТО
 //_____________________________
@@ -96,6 +101,7 @@ function submitHandlerEdit (dataUser) {
   userInfo.setUserInfo(dataUser) 
   // сохранение имени на сервере
   api.editUserInfo()
+    .finally(()=>{popupWithProfile.renderLoading('false')})
 };
 
 // редактирование аватара
@@ -103,7 +109,6 @@ buttonAvatarEdit.addEventListener('click', ()=>{
   popupEditValidate.deactivateButton();
   popupWithAvatar.open();
   popupEditValidate.hideAllInputErrors();
-
 })
 
 // обработчик «отправки» формы редактирования аватара
@@ -111,6 +116,7 @@ function submitHandlerEditAvatar (avatarInfo) {
   avatarContainer.src = avatarInfo.avatar
   // сохранение аватара на сервере
   api.editUserAvatar(avatarInfo.avatar)
+    .finally(()=>{popupWithAvatar.renderLoading('false')})
 };
 
 //_____________________________
@@ -120,43 +126,22 @@ function submitHandlerEditAvatar (avatarInfo) {
 // загрузка данных пользователя
 let userId
 
-// Promise.all([api.startPageProfile(), api.startPageCards()])
-// .then((profileData, cardsData) => {
-//   // добавление профиля
-//   userId = profileData._id;
-//   userInfo.setUserInfo(profileData)
-//   document.querySelector('.profile__avatar').src = profileData.avatar
-
-//   // добавление карточек
-//   console.log(cardsData)
-//   cardList.renderItems(cardsData.reverse());
-// })
-
-api.startPageProfile()
+const startPageProfile = api.startPageProfile()
   .then((res) => {
     userId = res._id;
     userInfo.setUserInfo(res)
     document.querySelector('.profile__avatar').src = res.avatar
-    
-})
+  })
 ; 
 
 // загрузка карточек
-api.startPageCards()
+const startPageCards = api.startPageCards()
   .then((result) => {
   // добавление карточек
       cardList.renderItems(result.reverse());
   })
-  ;
 
-// функция загрузка данных 
-  function renderLoading(isLoading) {
-    if  (isLoading) {
-      //  кнопка в форме .textContent = "Сохранение..."
-    } else {
-      //  кнопка в форме .textContent = "Создать"
-    }
-   }
+Promise.all([startPageProfile, startPageCards])
 
 //_____________________________
 //  ПОПАП ДОБАВЛЕНИЯ КАРТОЧКИ
@@ -171,7 +156,7 @@ buttonAddCard.addEventListener('click', ()=>{
 
 // добавление карточки
 function generateCard (dataCard) {
-  const card = new Card(dataCard, '.elements__list', openPopupFoto, popupWithDelete, userId, cardId, api).createCard()
+  const card = new Card(dataCard, '.elements__list', openPopupFoto, popupWithConfirmation, userId, cardId, api).createCard()
   return card
 }
 
@@ -185,14 +170,16 @@ function addCardFromPopup (dataCard) {
   .then((res) => {
     addCard(generateCard (res));
   })
-  // .finally(()=>{renderLoading('false')})
+  .finally(()=>{popupWithCard.renderLoading('false')})
 }
 
-
+// удаление карточки
 function deleteCard (idCard,card) {
   api.deleteCard(idCard)
     .then(()=> {
       card.remove()
-      console.log('Удалено')
     })
+    .catch((err) => {
+      console.log(err); 
+  }); 
 }
