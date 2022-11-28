@@ -4,9 +4,11 @@ import {buttonEdit,
         nameInfo,
         jobInput,
         jobInfo,
+        avatarContainer,
         buttonAddCard,
         initialCards,
-        validationObject }
+        validationObject,
+        buttonAvatarEdit }
   from '../utils/constans.js' 
 
 import FormValidator from '../components/FormValidator.js';
@@ -35,10 +37,11 @@ const popupWithImage = new PopupWithImage('.popup-foto')
 const popupWithCard = new PopupWithForm('.popup-add-card', addCardFromPopup)
 const popupWithProfile = new PopupWithForm('.popup-edit', submitHandlerEdit)
 const popupWithDelete =  new PopupWithDelete('.popup-delete', deleteCard);
+const popupWithAvatar = new PopupWithForm('.popup-avatar', submitHandlerEditAvatar)
 
 // профиль
 
-const userInfo = new UserInfo(nameInfo, jobInfo)
+const userInfo = new UserInfo(nameInfo, jobInfo, avatarContainer)
 
 let cardId
 // список карточек
@@ -89,11 +92,25 @@ buttonEdit.addEventListener('click', ()=>{
 });
 
 // обработчик «отправки» формы редактирования профиля
-// editUserInfo
 function submitHandlerEdit (dataUser) { 
   userInfo.setUserInfo(dataUser) 
   // сохранение имени на сервере
   api.editUserInfo()
+};
+
+// редактирование аватара
+buttonAvatarEdit.addEventListener('click', ()=>{  
+  popupEditValidate.deactivateButton();
+  popupWithAvatar.open();
+  popupEditValidate.hideAllInputErrors();
+
+})
+
+// обработчик «отправки» формы редактирования аватара
+function submitHandlerEditAvatar (avatarInfo) { 
+  avatarContainer.src = avatarInfo.avatar
+  // сохранение аватара на сервере
+  api.editUserAvatar(avatarInfo.avatar)
 };
 
 //_____________________________
@@ -102,11 +119,25 @@ function submitHandlerEdit (dataUser) {
 
 // загрузка данных пользователя
 let userId
+
+// Promise.all([api.startPageProfile(), api.startPageCards()])
+// .then((profileData, cardsData) => {
+//   // добавление профиля
+//   userId = profileData._id;
+//   userInfo.setUserInfo(profileData)
+//   document.querySelector('.profile__avatar').src = profileData.avatar
+
+//   // добавление карточек
+//   console.log(cardsData)
+//   cardList.renderItems(cardsData.reverse());
+// })
+
 api.startPageProfile()
   .then((res) => {
     userId = res._id;
     userInfo.setUserInfo(res)
     document.querySelector('.profile__avatar').src = res.avatar
+    
 })
 ; 
 

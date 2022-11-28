@@ -4,15 +4,17 @@
 // //_____________________________
 
 export default class UserInfo {
-    constructor (name, about) {
+    constructor (name, about, avatar) {
         this._nameContaier = name
         this._aboutContainer = about
+        this._avatarContainer = avatar
     }
 
     getUserInfo () {
         const user = {
             name: this._nameContaier.textContent,
-            about: this._aboutContainer.textContent
+            about: this._aboutContainer.textContent,
+            avatar: this._avatarContainer.src
         }
         return user
     }
@@ -21,4 +23,6 @@ export default class UserInfo {
         this._nameContaier.textContent = name
         this._aboutContainer.textContent = about
     }
+
+    
 }

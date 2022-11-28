@@ -8,7 +8,9 @@ export default class Api {
         this._userInfo = userInfo
         this._startRequest = baseUrl
         this._headers = headers
+        this._avatar = this._userInfo.getUserInfo().avatar
 
+        console.log(this._userInfo.getUserInfo().avatar)
         this._res = (res) => {
             if (res.ok) {
                 return res.json();
@@ -40,6 +42,20 @@ export default class Api {
             headers: this._headers,
             body: JSON.stringify(this._userInfo.getUserInfo())
         })
+        .then(this._res);
+        // .finally(()=>{renderLoading('false')})
+    }
+
+     // изменение аватара в профиле
+     editUserAvatar (avatar) {
+        fetch(`${this._startRequest}users/me/avatar`, {
+            method: 'PATCH',
+            headers: this._headers,
+            body: JSON.stringify({
+                avatar: avatar
+            })
+        })
+        .then(this._res);
         // .finally(()=>{renderLoading('false')})
     }
 

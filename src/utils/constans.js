@@ -6,7 +6,10 @@ export const nameInput = document.querySelector('.popup-edit').querySelector('.p
 export const jobInput = document.querySelector('.popup-edit').querySelector('.popup__input_type_job');
 
 export const nameInfo = document.querySelector('.profile__name');
-export const jobInfo = document.querySelector('.profile__job')
+export const jobInfo = document.querySelector('.profile__job');
+export const avatarContainer = document.querySelector('.profile__avatar');
+
+export const buttonAvatarEdit = document.querySelector('.profile__btn-avatar');
 
 // попап добавления фото
 export const buttonAddCard = document.querySelector('.profile__btn-add');
@@ -41,6 +44,12 @@ export const initialCards = [
       link: 'https://images.unsplash.com/photo-1568607689150-17e625c1586e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
     }
   ];
+
+  export const initial = [
+    {
+      name: 'avatar',
+      link: 'https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
+    }]
 
 //_____________________________
 //  для валидации
