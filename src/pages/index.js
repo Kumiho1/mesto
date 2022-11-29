@@ -19,6 +19,15 @@ import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 
+//  информация о попапе удаления
+//
+//  создание экземпляра попапа:   index.js                  48строка
+//  передача его в Card:          index.js                  186
+//  функция удаления карточки:    index.js                  212
+//  открытие попапа удаления:     Card.js                   106
+//  сабмит попапа:                PopupWithConfirmation.js  22
+//  API запрос:                   Api.js                    68
+
 //_____________________________
 //  ПОДКЛЮЧЕНИЕ ВАЛИДАЦИИ
 //_____________________________
