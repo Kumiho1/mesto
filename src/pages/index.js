@@ -91,8 +91,7 @@ buttonEdit.addEventListener('click', ()=>{
 
   // присвоение значения title инпутам
   const user =  userInfo.getUserInfo()
-  nameInput.value = user.name
-  jobInput.value = user.about
+  popupWithProfile.setInputValues(user)
   nameInput.focus();
 });
 
@@ -147,7 +146,6 @@ const startPageProfile = api.startPageProfile()
   .then((res) => {
     userId = res._id;
     userInfo.setUserInfo(res)
-    document.querySelector('.profile__avatar').src = res.avatar
   })
 ; 
 
