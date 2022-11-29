@@ -103,13 +103,13 @@ function submitHandlerEdit (dataUser) {
     .then ((dataUserRes)=> {
     userInfo.setUserInfo(dataUserRes)
     })
-    .then (()=>{
-      popupWithProfile.close()
-    })
     .catch((err) => {
         console.log(err); 
       })
-    .finally(()=>{popupWithProfile.renderLoading(false)})
+    .finally(()=>{
+      popupWithProfile.close()
+      popupWithProfile.renderLoading(false)
+    })
 };
 
 // редактирование аватара
@@ -126,13 +126,13 @@ function submitHandlerEditAvatar (avatarInfo) {
     .then((profile)=>{
       userInfo.setUserInfo(profile)
     })
-    // .then (()=>{
-    //   popupWithConfirmation.close()
-    // })
     .catch((err) => {
       console.log(err); 
     }) 
-    .finally(()=>{popupWithAvatar.renderLoading(false)})
+    .finally(()=>{
+      popupWithAvatar.renderLoading(false)
+      popupWithAvatar.close()
+    })
 };
 
 //_____________________________
@@ -157,7 +157,6 @@ const startPageCards = api.startPageCards()
   // добавление карточек
       cardList.renderItems(result.reverse());
   })
-  .then(()=>{console.log('cards');})
 
 Promise.all([startPageProfile, startPageCards])
   .catch((err) => {
@@ -191,6 +190,9 @@ function addCardFromPopup (dataCard) {
   .then((res) => {
     addCard(generateCard (res));
   })
+  .catch((err) => {
+    console.log(err); 
+  }) 
   .finally(()=>{
     popupWithCard.renderLoading(false)
     setTimeout(() => {
@@ -205,12 +207,10 @@ function deleteCard (idCard,card) {
     .then(()=> {
       card.remove()
     })
-    .then(()=>{
-      setTimeout(() => {
-        popupWithConfirmation.close()
-      }, 100);
-    })
     .catch((err) => {
       console.log(err); 
-  }); 
+    })
+    .finally(()=>{
+      popupWithConfirmation.close()
+    })
 }

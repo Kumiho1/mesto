@@ -13,7 +13,6 @@ export default class Card{
         this._containerCards =  document.querySelector(selectorContainerCards)
         this._handleCardClick = handleCardClick
         this._selectorLike = '.element__btn-like'
-        // this._containerLike = this._element.querySelector(this._selectorLike)
         this._selectorTrash = '.element__btn-trash'
         this._selectorFoto = '.element__foto'
         this._selectorCounter = '.element__counter'
@@ -23,36 +22,31 @@ export default class Card{
         this._userIdCard = data.owner._id
         this._idCard = cardId
         this._api = api
-        // this._element = () => {
-        //   const cardElement = 
-        //     this._containerCards
-        //     .content
-        //     .querySelector('.element')
-        //     .cloneNode(true);
-        //   return cardElement;
-        // }
-        // console.log(this._element);
     }
   
     createCard() {
       this._element = this._getTemplate();
-      this._setEventListeners();
       this._cardFoto = this._element.querySelector(this._selectorFoto);
-      this._element.querySelector('.element__name').textContent = this._name;
+      this._cardName = this._element.querySelector('.element__name');
+      this._cardLikeCounter = this._element.querySelector(this._selectorCounter)
+      this._cardTrash = this._element.querySelector(this._selectorTrash)
+      this._cardLike = this._element.querySelector(this._selectorLike)
+
+      this._setEventListeners();
+      this._cardName.textContent = this._name;
       this._cardFoto.src = this._link;
       this._cardFoto.alt = `${this._name} на фотографии`;
-      
-      this._element.querySelector(this._selectorCounter).textContent = this._counter
+      this._cardLikeCounter.textContent = this._counter
       
       // корзина
       if (this._isOwnedCard()) {
-        this._element.querySelector(this._selectorTrash).remove()
+        this._cardTrash.remove()
       }
 
       // лайк
       this._likes.forEach(el =>{
       if (el._id == this._userId) {
-        this._element.querySelector(this._selectorLike).classList.add('element__btn-like_active')
+        this._cardLike.classList.add('element__btn-like_active')
       }
       })
       return this._element;
@@ -73,9 +67,9 @@ export default class Card{
     }
   
     _setEventListeners() {
-      this._element.querySelector(this._selectorFoto).addEventListener('click', this._openFoto);
-      this._element.querySelector(this._selectorLike).addEventListener ('click', this._like);
-      this._element.querySelector(this._selectorTrash).addEventListener ('click', this._openPopupRemove);
+      this._cardFoto.addEventListener('click', this._openFoto);
+      this._cardLike.addEventListener ('click', this._like);
+      this._cardTrash.addEventListener ('click', this._openPopupRemove);
       }
   
     _openFoto = () => {
@@ -106,7 +100,7 @@ export default class Card{
     }
 
     _assignLikeCount (cardInfo) {
-      this._element.querySelector(this._selectorCounter).textContent = cardInfo.likes.length
+      this._cardLikeCounter.textContent = cardInfo.likes.length
     }
 
     _openPopupRemove = () => {

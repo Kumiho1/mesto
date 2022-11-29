@@ -19,7 +19,7 @@ export default class PopupWithConfirmation extends Popup {
 
     _setEventListeners (idCard, card) {
         super._setEventListeners();
-        this._btnSave.addEventListener('click', (evt) => {
+        this._formElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
             this._functionSubmit(idCard, card)
         })
@@ -27,21 +27,10 @@ export default class PopupWithConfirmation extends Popup {
 
     _removeEventListeners() {
         super._removeEventListeners();
-        this._btnSave._removeEventListener('click', (evt) => {
+        this._formElement.removeEventListener('submit', (evt) => {
             evt.preventDefault();
             this._functionSubmit(idCard, card)
         })
     }
 
-    // _setEventListeners (idCard, card) {
-    //     super._setEventListeners();
-    //     this._btnSave.addEventListener('click', this._submitForm)
-    // }
-        
-    // _submitForm = (evt) => {
-    //         evt.preventDefault();
-    //         this._functionSubmit(idCard, card)
-    //         this.close();
-    // }
-    
 }
