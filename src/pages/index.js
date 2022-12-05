@@ -168,7 +168,7 @@ buttonAddCard.addEventListener('click', ()=>{
 });
 
 // медод открытия попапа подтверждения
-const openPopupDelete = (idCard, card) => PopupWithConfirmation.open(idCard, card)
+const openPopupDelete = (idCard, card) => popupWithConfirmation.open(idCard, card)
 // медоды действий с лайком
 const sendLike = (idCard) => api.sendLike(idCard)
 const deleteLike = (idCard) => api.deleteLike(idCard)
