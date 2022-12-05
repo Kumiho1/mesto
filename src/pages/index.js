@@ -51,7 +51,6 @@ let cardId
 // список карточек
 const cardList = new Section({
   renderer: (item) => {
-    cardId = item._id
     const card = generateCard(item);
     cardList.addItem(card);
   }
@@ -174,7 +173,7 @@ buttonAddCard.addEventListener('click', ()=>{
 
 // добавление карточки
 function generateCard (dataCard) {
-  const card = new Card(dataCard, '.elements__list', openPopupFoto, popupWithConfirmation, userId, cardId, api).createCard()
+  const card = new Card(dataCard, '.elements__list', openPopupFoto, popupWithConfirmation, userId, api).createCard()
   return card
 }
 

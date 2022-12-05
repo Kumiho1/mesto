@@ -5,7 +5,7 @@
 // попап просмотра фото
 
 export default class Card{
-    constructor(data, selectorContainerCards, handleCardClick, popupDelete, userId, cardId, api) {
+    constructor(data, selectorContainerCards, handleCardClick, popupDelete, userId, api) {
         this._name = data.name
         this._link = data.link
         this._counter = data.likes.length
@@ -20,7 +20,7 @@ export default class Card{
         this._popupDeleteSaveButton = document.querySelector('.popup-confirmation').querySelector('.popup__btn-save')
         this._userId = userId
         this._userIdCard = data.owner._id
-        this._idCard = cardId
+        this._idCard = data._id
         this._api = api
     }
   
