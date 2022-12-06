@@ -5,7 +5,7 @@
 // попап просмотра фото
 
 export default class Card{
-    constructor(data, selectorContainerCards, handleCardClick, popupDelete, userId, cardId, api) {
+    constructor(data, selectorContainerCards, handleCardClick, openPopupDelete, userId, sendLike, deleteLike) {
         this._name = data.name
         this._link = data.link
         this._counter = data.likes.length
@@ -16,12 +16,14 @@ export default class Card{
         this._selectorTrash = '.element__btn-trash'
         this._selectorFoto = '.element__foto'
         this._selectorCounter = '.element__counter'
-        this._popupDelete = popupDelete
         this._popupDeleteSaveButton = document.querySelector('.popup-confirmation').querySelector('.popup__btn-save')
         this._userId = userId
         this._userIdCard = data.owner._id
-        this._idCard = cardId
-        this._api = api
+        this._idCard = data._id
+        this._deleteLike = deleteLike
+        this._sendLike = sendLike
+        this._popupDelete = openPopupDelete
+        
     }
   
     createCard() {
@@ -78,7 +80,7 @@ export default class Card{
   
     _like = (evt) => {
      if ( evt.target.classList.contains('element__btn-like_active') ) {
-        this._api.deleteLike(this._idCard)
+        this._deleteLike(this._idCard)
           .then((res) => {
             this._assignLikeCount(res)
             evt.target.classList.remove('element__btn-like_active')
@@ -88,7 +90,7 @@ export default class Card{
           });
         
      } else {
-        this._api.sendLike(this._idCard)
+        this._sendLike(this._idCard)
           .then((res) => {
             this._assignLikeCount(res)
             evt.target.classList.add('element__btn-like_active')
@@ -104,7 +106,7 @@ export default class Card{
     }
 
     _openPopupRemove = () => {
-      this._popupDelete.open(this._idCard, this._element)
+      this._popupDelete(this._idCard, this._element)
     }
 
      _remove = () => {
