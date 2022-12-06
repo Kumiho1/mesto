@@ -174,8 +174,10 @@ buttonAddCard.addEventListener('click', ()=>{
 
 // добавление карточки
 function generateCard (dataCard) {
-  const card = new Card(dataCard, '.elements__list', openPopupFoto, popupWithConfirmation, userId, cardId, api).createCard()
-  return card
+  const card = new  Card(dataCard, '.elements__list', openPopupFoto, 
+                        popupWithConfirmation, userId, cardId, api)
+                    .createCard()
+  return card                 
 }
 
 function addCard(card) {
