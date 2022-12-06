@@ -101,11 +101,13 @@ function submitHandlerEdit (dataUser) {
     .then ((dataUserRes)=> {
       userInfo.setUserInfo(dataUserRes)
       popupWithProfile.close()
-      popupWithProfile.renderLoading(false)
     })
     .catch((err) => {
         console.log(err); 
-      })
+    })
+    .finally(()=>{
+      popupWithProfile.renderLoading(false)
+    })
 };
 
 // редактирование аватара
@@ -121,11 +123,13 @@ function submitHandlerEditAvatar (avatarInfo) {
   api.editUserAvatar(avatarInfo.avatar)
     .then((profile)=>{
       userInfo.setUserInfo(profile)
-      popupWithAvatar.renderLoading(false)
       popupWithAvatar.close()
     })
     .catch((err) => {
       console.log(err); 
+    })
+    .finally(()=>{
+      popupWithAvatar.renderLoading(false)
     }) 
 };
 
@@ -189,14 +193,16 @@ function addCardFromPopup (dataCard) {
   api.sendCard(dataCard)
   .then((res) => {
     addCard(generateCard (res));
-    popupWithCard.renderLoading(false)
     setTimeout(() => {
       popupWithCard.close()
     }, 100);
   })
   .catch((err) => {
     console.log(err); 
-  }) 
+  })
+  .finally(()=>{
+    popupWithCard.renderLoading(false)
+  })  
 }
 
 // удаление карточки
